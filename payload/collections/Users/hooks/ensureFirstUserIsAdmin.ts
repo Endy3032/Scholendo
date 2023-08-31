@@ -1,4 +1,4 @@
-import type { User } from "@/payload-types"
+import type { User } from "payload/generated-types"
 import type { FieldHook } from "payload/types"
 
 export const ensureFirstUserIsAdmin: FieldHook<User, any[]> = async ({ req, operation, value }) => {
