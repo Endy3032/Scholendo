@@ -8,15 +8,34 @@
 
 export interface Config {
   collections: {
-    users: User;
+    activities: Activity;
     categories: Category;
+    users: User;
   };
   globals: {};
+}
+export interface Activity {
+  id: string;
+  name: string;
+  date: string;
+  endDate?: string;
+  info?: string;
+  details?: {
+    [k: string]: unknown;
+  }[];
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Category {
+  id: string;
+  title?: string;
+  updatedAt: string;
+  createdAt: string;
 }
 export interface User {
   id: string;
   name: string;
-  roles?: ('admin' | 'user')[];
+  roles?: ('admin' | 'staff' | 'student')[];
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -24,13 +43,9 @@ export interface User {
   resetPasswordExpiration?: string;
   salt?: string;
   hash?: string;
+  _verified?: boolean;
+  _verificationToken?: string;
   loginAttempts?: number;
   lockUntil?: string;
   password?: string;
-}
-export interface Category {
-  id: string;
-  title?: string;
-  updatedAt: string;
-  createdAt: string;
 }

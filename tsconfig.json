@@ -21,7 +21,7 @@
 		"isolatedModules": true,
 		"paths": {
 			"payload/generated-types": [
-				"./payload-types.ts"
+				"./payload/payload-types.ts"
 			],
 			"@/*": [
 				"./*"
