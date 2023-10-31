@@ -1,5 +1,3 @@
-"use client"
-
 import Root from "payload/dist/admin/Root"
 import React from "react"
 
