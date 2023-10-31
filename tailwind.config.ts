@@ -80,7 +80,6 @@ const config: Config = {
 	},
 	plugins: [
 		twAnimate,
-		,
 		plugin(function({ addBase, theme }) {
 			addBase({
 				h1: { fontSize: theme("fontSize.2xl") },
