@@ -25,6 +25,9 @@
 			],
 			"@/*": [
 				"./*"
+			],
+			"globalsStyles": [
+				"./app/globals.css"
 			]
 		},
 		"plugins": [
