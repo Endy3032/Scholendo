@@ -36,6 +36,12 @@ const Activites: CollectionConfig = {
 			required: false,
 		},
 		{
+			name: "participants",
+			type: "relationship",
+			relationTo: "users",
+			hasMany: true,
+		},
+		{
 			name: "details",
 			type: "richText",
 			required: false,

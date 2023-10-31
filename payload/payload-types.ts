@@ -20,22 +20,17 @@ export interface Activity {
   date: string;
   endDate?: string;
   info?: string;
+  participants?: string[] | User[];
   details?: {
     [k: string]: unknown;
   }[];
   updatedAt: string;
   createdAt: string;
 }
-export interface Category {
-  id: string;
-  title?: string;
-  updatedAt: string;
-  createdAt: string;
-}
 export interface User {
   id: string;
   name: string;
-  roles?: ('admin' | 'staff' | 'student')[];
+  roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[];
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -48,4 +43,10 @@ export interface User {
   loginAttempts?: number;
   lockUntil?: string;
   password?: string;
+}
+export interface Category {
+  id: string;
+  title?: string;
+  updatedAt: string;
+  createdAt: string;
 }
