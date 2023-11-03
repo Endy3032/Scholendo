@@ -1,5 +1,4 @@
 import "./globals.css"
-import { ThemeProvider } from "@/components/theme-provider"
 import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 
@@ -15,10 +14,10 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
 	return (
-		<html lang="en" suppressHydrationWarning>
-			<ThemeProvider attribute="class" defaultTheme="system" enableSystem enableColorScheme>
-				<body className={inter.className} suppressHydrationWarning>{children}</body>
-			</ThemeProvider>
+		<html lang="en">
+			<body className={`${inter.className} min-h-screen`}>
+				{children}
+			</body>
 		</html>
 	)
 }
