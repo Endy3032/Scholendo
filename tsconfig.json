@@ -23,12 +23,12 @@
 			"payload/generated-types": [
 				"./payload/payload-types.ts"
 			],
+			"payload/client": [
+				"./payload/payloadClient.ts"
+			],
 			"@/*": [
 				"./*"
 			],
-			"globalsStyles": [
-				"./app/globals.css"
-			]
 		},
 		"plugins": [
 			{

@@ -11,6 +11,8 @@ export interface Config {
     activities: Activity;
     categories: Category;
     users: User;
+    'payload-preferences': PayloadPreference;
+    'payload-migrations': PayloadMigration;
   };
   globals: {};
 }
@@ -18,35 +20,68 @@ export interface Activity {
   id: string;
   name: string;
   date: string;
-  endDate?: string;
-  info?: string;
-  participants?: string[] | User[];
-  details?: {
-    [k: string]: unknown;
-  }[];
+  endDate?: string | null;
+  info?: string | null;
+  participants?: (string | User)[] | null;
+  details?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
 export interface User {
   id: string;
   name: string;
-  roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[];
+  roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[] | null;
   updatedAt: string;
   createdAt: string;
   email: string;
-  resetPasswordToken?: string;
-  resetPasswordExpiration?: string;
-  salt?: string;
-  hash?: string;
-  _verified?: boolean;
-  _verificationToken?: string;
-  loginAttempts?: number;
-  lockUntil?: string;
-  password?: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  _verified?: boolean | null;
+  _verificationToken?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  password: string | null;
 }
 export interface Category {
   id: string;
-  title?: string;
+  title?: string | null;
   updatedAt: string;
   createdAt: string;
+}
+export interface PayloadPreference {
+  id: string;
+  user: {
+    relationTo: 'users';
+    value: string | User;
+  };
+  key?: string | null;
+  value?:
+    | {
+        [k: string]: unknown;
+      }
+    | unknown[]
+    | string
+    | number
+    | boolean
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface PayloadMigration {
+  id: string;
+  name?: string | null;
+  batch?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+
+
+declare module 'payload' {
+  export interface GeneratedTypes extends Config {}
 }
