@@ -3,7 +3,8 @@ import { CollectionConfig } from "payload/types"
 import { admins, adminsOrSameUser, anyone } from "./access"
 import { ensureFirstUserIsAdmin } from "./hooks/ensureFirstUserIsAdmin"
 
-export const checkRoles = (roles: User["roles"] = [], user?: User | null) => roles.some(role => user?.roles?.includes(role))
+export const checkRoles = (roles: NonNullable<User["roles"]> = [], user?: User | null) =>
+	roles.some(role => user?.roles?.includes(role))
 
 const Users: CollectionConfig = {
 	auth: {
