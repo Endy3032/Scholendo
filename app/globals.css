@@ -7,29 +7,31 @@
 	--background-start-rgb: 0, 0, 0;
 	--background-end-rgb: 0, 0, 0;
 
-	--background: 224 71.4% 4.1%;
-	--foreground: 210 20% 98%;
-	--card: 224 71.4% 4.1%;
-	--card-foreground: 210 20% 98%;
-	--popover: 224 71.4% 4.1%;
-	--popover-foreground: 210 20% 98%;
-	--primary: 210 20% 98%;
-	--primary-foreground: 220.9 39.3% 11%;
-	--secondary: 215 27.9% 16.9%;
-	--secondary-foreground: 210 20% 98%;
-	--muted: 215 27.9% 16.9%;
-	--muted-foreground: 217.9 10.6% 64.9%;
-	--accent: 215 27.9% 16.9%;
-	--accent-foreground: 210 20% 98%;
-	--destructive: 0 62.8% 30.6%;
-	--destructive-foreground: 210 20% 98%;
-	--border: 215 27.9% 16.9%;
-	--input: 215 27.9% 16.9%;
-	--ring: 216 12.2% 83.9%;
+	--background: #030712;
+	--foreground: #F9FAFB;
+	--card: #030712;
+	--card-foreground: #F9FAFB;
+	--popover: #030712;
+	--popover-foreground: #F9FAFB;
+	--primary: #F9FAFB;
+	--primary-foreground: #111827;
+	--secondary: #1F2937;
+	--secondary-foreground: #F9FAFB;
+	--muted: #1F2937;
+	--muted-foreground: #9CA3AF;
+	--accent: #1F2937;
+	--accent-foreground: #F9FAFB;
+	--destructive: #BF616A;
+	--destructive-foreground: #F9FAFB;
+	--border: #1F2937;
+	--input: #1F2937;
+	--ring: #D1D5DB;
 
 	--radius: 0.5rem;
 }
 
-body {
-	@apply bg-background text-foreground;
+@layer base {
+	body {
+		@apply bg-background text-foreground;
+	}
 }

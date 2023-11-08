@@ -1,8 +1,8 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { useAuth } from "@/hooks/auth"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "/components/ui/card"
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "/components/ui/tabs"
+import { useAuth } from "/hooks/auth"
 import { useRouter } from "next/navigation"
 import SignIn from "./signIn"
 import SignUp from "./signUp"
