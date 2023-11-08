@@ -1642,6 +1642,20 @@
     prompts "2.4.2"
     uuid "9.0.0"
 
+"@payloadcms/db-mongodb@^1.0.6":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@payloadcms/db-mongodb/-/db-mongodb-1.0.6.tgz#8cc6a4a5f356e5393aa16cb355b2e76faa12f0d0"
+  integrity sha512-9rcXNygPBbOkTcf6vMpv1ZaCmKx+BWVm6z5lflHZsi/udPGF7aL+3m7kCTD9N2qi4rDewfdxbifime2benKWYw==
+  dependencies:
+    bson-objectid "2.0.4"
+    deepmerge "4.3.1"
+    get-port "5.1.1"
+    mongoose "6.12.0"
+    mongoose-aggregate-paginate-v2 "1.0.6"
+    mongoose-paginate-v2 "1.7.22"
+    prompts "2.4.2"
+    uuid "9.0.0"
+
 "@payloadcms/next-payload@^0.1.9":
   version "0.1.9"
   resolved "https://registry.yarnpkg.com/@payloadcms/next-payload/-/next-payload-0.1.9.tgz#d0141af88883a61bc507adb2ec8d03b7eef244ef"
@@ -6370,10 +6384,10 @@ lru-queue@^0.1.0:
   dependencies:
     es5-ext "~0.10.2"
 
-lucide-react@^0.291.0:
-  version "0.291.0"
-  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.291.0.tgz#d6db8f5117a68c8bbc6ed51d800879fa6a471978"
-  integrity sha512-79jHlT9Je2PXSvXIBGDkItCK7In2O9iKnnSJ/bJxvIBOFaX2Ex0xEcC4fRS/g0F2uQGFejjmn2qWhwdc5wicMQ==
+lucide-react@^0.292.0:
+  version "0.292.0"
+  resolved "https://registry.yarnpkg.com/lucide-react/-/lucide-react-0.292.0.tgz#c8a06b2ccd8a348a88669def3c0291c035de2884"
+  integrity sha512-rRgUkpEHWpa5VCT66YscInCQmQuPCB1RFRzkkxMxg4b+jaL0V12E3riWWR2Sh5OIiUhCwGW/ZExuEO4Az32E6Q==
 
 md5@2.3.0:
   version "2.3.0"
@@ -7999,7 +8013,7 @@ qs@6.11.0:
   dependencies:
     side-channel "^1.0.4"
 
-qs@6.11.2, qs@^6.11.1, qs@^6.9.1:
+qs@6.11.2, qs@^6.11.1, qs@^6.11.2, qs@^6.9.1:
   version "6.11.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.2.tgz#64bea51f12c1f5da1bc01496f48ffcff7c69d7d9"
   integrity sha512-tDNIz22aBzCDxLtVH++VnTfzxlfeK5CbqohpSqpJgj1Wg/cQbStNAz3NuqCs5vV+pjBsK4x4pN9HlVh7rcYRiA==
