@@ -35,6 +35,8 @@ export interface User {
   id: string;
   name: string;
   roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[] | null;
+  verified?: boolean | null;
+  verificationToken?: string | null;
   updatedAt: string;
   createdAt: string;
   email: string;
@@ -42,8 +44,6 @@ export interface User {
   resetPasswordExpiration?: string | null;
   salt?: string | null;
   hash?: string | null;
-  _verified?: boolean | null;
-  _verificationToken?: string | null;
   loginAttempts?: number | null;
   lockUntil?: string | null;
   password: string | null;

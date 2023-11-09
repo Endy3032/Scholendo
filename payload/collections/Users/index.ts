@@ -8,13 +8,13 @@ export const checkRoles = (roles: NonNullable<User["roles"]> = [], user?: User |
 
 const Users: CollectionConfig = {
 	auth: {
-		verify: {
-			generateEmailSubject: () => `Verify your email - CTin2225`,
-			generateEmailHTML: ({ token, user }: { token: string; user: User }) => {
-				const url = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`
-				return `Hey ${user.name}, click <a href="${url}">here</a> to verify your email!`
-			},
-		},
+		// verify: {
+		// 	generateEmailSubject: () => `Verify your email - CTin2225`,
+		// 	generateEmailHTML: ({ token, user }: { token: string; user: User }) => {
+		// 		const url = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`
+		// 		return `Hey ${user.name}, click <a href="${url}">here</a> to verify your email!`
+		// 	},
+		// },
 	},
 	slug: "users",
 	admin: {
@@ -22,9 +22,12 @@ const Users: CollectionConfig = {
 		defaultColumns: ["name", "email", "roles"],
 	},
 	access: {
+		create: anyone,
 		read: anyone,
-		create: admins,
 		update: adminsOrSameUser,
+		delete: adminsOrSameUser,
+		readVersions: adminsOrSameUser,
+		unlock: admins,
 	},
 	fields: [
 		{
@@ -80,6 +83,16 @@ const Users: CollectionConfig = {
 				create: admins,
 				update: admins,
 			},
+		},
+		{
+			name: "verified",
+			type: "checkbox",
+			hidden: true,
+		},
+		{
+			name: "verificationToken",
+			type: "text",
+			hidden: true,
 		},
 	],
 	timestamps: true,

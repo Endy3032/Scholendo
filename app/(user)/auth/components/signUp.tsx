@@ -3,10 +3,15 @@
 import { Button } from "/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "/components/ui/form"
 import { Input } from "/components/ui/input"
+import { useAlert } from "/hooks/alert"
+import { CreateOptions, FormAPIResponse } from "/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { useRouter } from "next/navigation"
+import { Loader2 } from "lucide-react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import styles from "../../styles.module.css"
+import { useTab } from "../tabContext"
 
 const formSchema = z.object({
 	username: z.string().min(2).max(32),
@@ -25,7 +30,9 @@ const formSchema = z.object({
 })
 
 const SignUp = () => {
-	const router = useRouter()
+	const [loading, setLoading] = useState(false)
+	const { addAlert } = useAlert()
+	const { setTab } = useTab()
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),
@@ -38,14 +45,38 @@ const SignUp = () => {
 			confirmPassword: "",
 		},
 	})
+	const { setError } = form
 
-	function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
+	useEffect(() => addAlert("Test error alert", "error"), [addAlert])
+
+	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setLoading(true)
+		try {
+			const user = await fetch("/api/auth/sign-up", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					name: values.name,
+					email: values.email,
+					password: values.password,
+				} satisfies CreateOptions<"users">),
+			})
+			const data = await user.json() as FormAPIResponse<keyof z.infer<typeof formSchema>>
+
+			if (!user.ok) setError(data.field, { message: data.message })
+			else addAlert("Signed up successfully!")
+		} catch (e) {
+			alert(e.message)
+			addAlert(e.message, "error")
+		}
+		setLoading(false)
 	}
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="max-h-min h-min space-y-4 max-w-[30rem] w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
 				<FormField control={form.control} name="username" render={({ field }) => (
 					<FormItem>
 						<FormLabel>Username</FormLabel>
@@ -91,7 +122,15 @@ const SignUp = () => {
 						<FormMessage />
 					</FormItem>
 				)} />
-				<Button type="submit">Sign up</Button>
+				<div className="space-y-2">
+					<button type="button" onClick={() => setTab("signin")} className={styles.formAction}>
+						Already have an account?
+					</button>
+				</div>
+				<Button type="submit" disabled={loading}>
+					{loading ? <Loader2 className="h-full animate-spin -ml-1 mr-2" /> : null}
+					Sign up
+				</Button>
 			</form>
 		</Form>
 	)

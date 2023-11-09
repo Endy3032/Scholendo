@@ -1,0 +1,16 @@
+.container {
+	@apply flex flex-col p-4 pt-10 sm:pt-10 md:pt-16 items-center space-y-4;
+}
+
+.authMessage {
+	text-align: center;
+	text-wrap: balance;
+}
+
+.form {
+	@apply max-h-min h-min space-y-4 max-w-[30rem] w-full;
+}
+
+.formAction {
+	@apply text-sm text-left underline underline-offset-1 text-gray-400;
+}

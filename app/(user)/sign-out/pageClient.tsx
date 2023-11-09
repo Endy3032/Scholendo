@@ -3,6 +3,7 @@
 import { useAuth } from "/hooks/auth"
 import { useRouter } from "next/navigation"
 import { useEffect, useState } from "react"
+import styles from "../styles.module.css"
 
 const SignOut = () => {
 	const router = useRouter()
@@ -26,7 +27,11 @@ const SignOut = () => {
 	}, [isSignedIn, isLoading, isSignedOut])
 
 	if (isSignedOut) setTimeout(() => router.push("/auth"), 500)
-	return <h1>Signing out...</h1>
+	return (
+		<div className={styles.container}>
+			<h1 className={styles.authMessage}>Signing out...</h1>
+		</div>
+	)
 }
 
 export default SignOut

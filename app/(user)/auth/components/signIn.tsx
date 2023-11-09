@@ -7,6 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
+import styles from "../../styles.module.css"
+import ForgotPassword from "./forgotPassword"
 
 const formSchema = z.object({
 	email: z.string().email(),
@@ -25,6 +27,8 @@ const SignIn = () => {
 		},
 	})
 
+	const { formState: { errors } } = form
+
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		try {
 			const result = await fetch(`/api/users/login`, {
@@ -37,8 +41,15 @@ const SignIn = () => {
 					password: values.password,
 				}),
 			})
+
 			const data = await result.json()
-			if (data.message == "Auth Passed") router.push("/")
+
+			if (!result.ok) {
+				form.setError("root.login", {
+					type: "validate",
+					message: data.errors[0].message,
+				})
+			} else if (data.message == "Auth Passed") router.push("/")
 		} catch (e) {
 			console.error(e)
 		}
@@ -46,7 +57,7 @@ const SignIn = () => {
 
 	return (
 		<Form {...form}>
-			<form onSubmit={form.handleSubmit(onSubmit)} className="max-h-min h-min space-y-4 max-w-[30rem] w-full">
+			<form onSubmit={form.handleSubmit(onSubmit)} className={styles.form}>
 				<FormField control={form.control} name="email" render={({ field }) => (
 					<FormItem>
 						<FormLabel>Email</FormLabel>
@@ -65,6 +76,8 @@ const SignIn = () => {
 						<FormMessage />
 					</FormItem>
 				)} />
+				{errors.root?.login && <p className="text-red-500">{errors.root.login.message}</p>}
+				<ForgotPassword />
 				<Button type="submit">Sign in</Button>
 			</form>
 		</Form>
