@@ -7,7 +7,7 @@ import { useAlert } from "/hooks/alert"
 import { CreateOptions, FormAPIResponse } from "/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Loader2 } from "lucide-react"
-import { useEffect, useState } from "react"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import styles from "../../styles.module.css"
@@ -47,8 +47,6 @@ const SignUp = () => {
 	})
 	const { setError } = form
 
-	useEffect(() => addAlert("Test error alert", "error"), [addAlert])
-
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setLoading(true)
 		try {
@@ -66,9 +64,11 @@ const SignUp = () => {
 			const data = await user.json() as FormAPIResponse<keyof z.infer<typeof formSchema>>
 
 			if (!user.ok) setError(data.field, { message: data.message })
-			else addAlert("Signed up successfully!")
+			else {
+				addAlert("Signed up successfully!")
+				setTab("signin")
+			}
 		} catch (e) {
-			alert(e.message)
 			addAlert(e.message, "error")
 		}
 		setLoading(false)

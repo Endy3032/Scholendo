@@ -8,6 +8,7 @@ import { useAlert } from "/hooks/alert"
 import { useAuth } from "/hooks/auth"
 import { AlertCircle, UserCheck2, X } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 import styles from "../styles.module.css"
 import SignIn from "./components/signIn"
 import SignUp from "./components/signUp"
@@ -16,7 +17,7 @@ import { useTab } from "./tabContext"
 const Auth = () => {
 	const router = useRouter()
 	const { isSignedIn, isLoading } = useAuth()
-	const { alerts, removeAlert } = useAlert()
+	const { alerts, addAlert, removeAlert } = useAlert()
 	const { tab, setTab } = useTab()
 
 	if (isSignedIn && !isLoading) {
@@ -38,7 +39,7 @@ const Auth = () => {
 						<TabsTrigger value="signin">Sign In</TabsTrigger>
 					</TabsList>
 					<TabsContent value="signup">
-						<Card className="w-full">
+						<Card>
 							<CardHeader>
 								<CardTitle>Sign Up</CardTitle>
 								<CardDescription>Sign up for a new account</CardDescription>
@@ -61,25 +62,36 @@ const Auth = () => {
 					</TabsContent>
 				</Tabs>
 			</div>
-			<div className="fixed top-0 right-0 p-6 max-w-xl m-0 flex flex-col gap-4 overflow-scroll max-h-screen">
+			<div className="fixed top-0 right-0 p-6 m-0 max-w-sm flex flex-col items-end gap-4 overflow-scroll max-h-screen">
 				{alerts.slice().reverse().map(e => (
-					<Alert className="flex flex-row gap-4" variant={e.type === "error" ? "destructive" : "default"} key={e.id}>
+					<Alert
+						className={`flex flex-row gap-2 max-w-max backdrop-blur-sm bg-opacity-30 ${
+							e.type === "error" ? "bg-red-950" : "bg-slate-800"
+						}`}
+						variant={e.type === "error" ? "destructive" : "default"}
+						key={e.id}
+					>
 						<div className="content flex-1">
 							<AlertTitle>
 								<div className="flex flex-row gap-2">
-									{e.type === "error" ? <AlertCircle className="h-4 w-4" /> : <UserCheck2 className="h-4 w-4" />}
+									{e.type === "error"
+										? (
+											<div>
+												<AlertCircle className="absolute h-4 w-4 animate-[ping_1.5s_ease-out_infinite]" />
+												<AlertCircle className="h-4 w-4" />
+											</div>
+										)
+										: <UserCheck2 className="h-4 w-4" />}
 									{e.type === "error" ? "Error" : "Success"}
 								</div>
 							</AlertTitle>
-							<AlertDescription>
-								{e.message} {e.id}
-							</AlertDescription>
+							<AlertDescription className="">{e.message}</AlertDescription>
 						</div>
-						<Button className="p-2" variant="ghost" onClick={() =>
-							removeAlert(e.id)}
-						>
-							<X />
-						</Button>
+						<div className="flex items-center">
+							<Button className="p-1 w-8 h-8" variant="ghost" onClick={() => removeAlert(e.id)}>
+								<X />
+							</Button>
+						</div>
 					</Alert>
 				))}
 			</div>

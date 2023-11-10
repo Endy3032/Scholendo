@@ -1,5 +1,6 @@
 "use client"
 
+import { Badge } from "/components/ui/badge"
 import { Button } from "/components/ui/button"
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle,
 	DialogTrigger } from "/components/ui/dialog"
@@ -54,11 +55,13 @@ const ForgotPassword = () => {
 				<DialogTrigger asChild>
 					<button type="button" className={styles.formAction}>Forgot password?</button>
 				</DialogTrigger>
-				<DialogContent>
+				<DialogContent className="">
 					<DialogHeader>
-						<DialogTitle>Forgot password</DialogTitle>
+						<DialogTitle>
+							Forgot password <Badge className="rounded-md ml-1 px-2">WIP</Badge>
+						</DialogTitle>
 						<DialogDescription>
-							Enter your email address and we&apos;ll send you a link to reset your password.
+							Enter your email and we&apos;ll send you a password reset link.
 						</DialogDescription>
 					</DialogHeader>
 					<Form {...form}>

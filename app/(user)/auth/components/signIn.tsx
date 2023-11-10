@@ -3,8 +3,11 @@
 import { Button } from "/components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "/components/ui/form"
 import { Input } from "/components/ui/input"
+import { useAlert } from "/hooks/alert"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { Loader2 } from "lucide-react"
 import { useRouter } from "next/navigation"
+import { useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import styles from "../../styles.module.css"
@@ -16,6 +19,8 @@ const formSchema = z.object({
 })
 
 const SignIn = () => {
+	const [loading, setLoading] = useState(false)
+	const { addAlert } = useAlert()
 	const router = useRouter()
 
 	const form = useForm<z.infer<typeof formSchema>>({
@@ -30,6 +35,7 @@ const SignIn = () => {
 	const { formState: { errors } } = form
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
+		setLoading(true)
 		try {
 			const result = await fetch(`/api/users/login`, {
 				method: "POST",
@@ -49,10 +55,14 @@ const SignIn = () => {
 					type: "validate",
 					message: data.errors[0].message,
 				})
-			} else if (data.message == "Auth Passed") router.push("/")
+			} else if (data.message == "Auth Passed") {
+				addAlert(`Welcome back, ${data.user.name}! Redirecting to dashboard...`)
+				setTimeout(() => router.push("/"), 2000)
+			}
 		} catch (e) {
-			console.error(e)
+			addAlert(e.message, "error")
 		}
+		setLoading(false)
 	}
 
 	return (
@@ -78,7 +88,10 @@ const SignIn = () => {
 				)} />
 				{errors.root?.login && <p className="text-red-500">{errors.root.login.message}</p>}
 				<ForgotPassword />
-				<Button type="submit">Sign in</Button>
+				<Button type="submit" disabled={loading}>
+					{loading ? <Loader2 className="h-full animate-spin -ml-1 mr-2" /> : null}
+					Sign in
+				</Button>
 			</form>
 		</Form>
 	)
