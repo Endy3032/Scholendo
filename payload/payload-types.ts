@@ -10,6 +10,9 @@ export interface Config {
   collections: {
     activities: Activity;
     categories: Category;
+    homework: Homework;
+    subjects: Subject;
+    timetable: Timetable;
     users: User;
     'payload-preferences': PayloadPreference;
     'payload-migrations': PayloadMigration;
@@ -51,6 +54,37 @@ export interface User {
 export interface Category {
   id: string;
   title?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Homework {
+  id: string;
+  subject?: (string | null) | Subject;
+  deadline?: string | null;
+  type?: ('BTVN' | 'TX - HS1' | 'GK - HS2') | null;
+  description?: string | null;
+  notes?: string | null;
+  details?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Subject {
+  id: string;
+  subject?: string | null;
+  teacher?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Timetable {
+  id: string;
+  subject?: (string | null) | Subject;
+  day?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday') | null;
+  session?: ('Morning' | 'Afternoon') | null;
+  period?: ('1' | '2' | '3' | '4' | '5') | null;
   updatedAt: string;
   createdAt: string;
 }

@@ -4,12 +4,18 @@ import path from "path"
 import { buildConfig } from "payload/config"
 import Activites from "./collections/Activities"
 import Categories from "./collections/Categories"
+import Homework from "./collections/Homework"
+import Subjects from "./collections/Subjects"
+import Timetable from "./collections/Timetable"
 import Users from "./collections/Users"
 
 export default buildConfig({
 	collections: [
 		Activites,
 		Categories,
+		Homework,
+		Subjects,
+		Timetable,
 		Users,
 	],
 	db: mongooseAdapter({ url: process.env.MONGODB_URI || false }),
