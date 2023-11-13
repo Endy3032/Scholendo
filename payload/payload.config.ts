@@ -34,7 +34,6 @@ export default buildConfig({
 			},
 		},
 	},
-	serverURL: process.env.PAYLOAD_CMS_URL ?? "http://localhost:3000",
 	typescript: {
 		outputFile: path.resolve(__dirname, "./payload-types.ts"),
 	},
