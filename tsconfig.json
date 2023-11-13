@@ -1,11 +1,12 @@
 {
 	"compilerOptions": {
-		"target": "es5",
+		"target": "ESNext",
 		"lib": [
 			"dom",
 			"dom.iterable",
 			"esnext"
 		],
+		"baseUrl": ".",
 		"allowJs": true,
 		"strict": false,
 		"esModuleInterop": true,
@@ -21,14 +22,11 @@
 		"isolatedModules": true,
 		"paths": {
 			"payload/generated-types": [
-				"./payload/payload-types.ts"
+				"payload/payload-types.ts"
 			],
 			"payload/client": [
-				"./payload/payloadClient.ts"
-			],
-			"/*": [
-				"./*"
-			],
+				"payload/payloadClient.ts"
+			]
 		},
 		"plugins": [
 			{

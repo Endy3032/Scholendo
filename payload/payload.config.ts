@@ -15,18 +15,20 @@ export default buildConfig({
 	db: mongooseAdapter({ url: process.env.MONGODB_URI || false }),
 	editor: lexicalEditor({}),
 	email: {
-		fromAddress: "ctin2225@resend.dev",
+		fromAddress: "ctin2225@icloud.com",
 		fromName: "CTin2225",
 		transportOptions: {
-			host: "smtp.resend.com",
-			secure: true,
-			port: 465,
+			host: "smtp.mail.me.com",
+			secure: false,
+			requireTLS: false,
+			port: 587,
 			auth: {
-				user: "resend",
-				pass: process.env.RESEND_API_KEY,
+				user: "endy3032@icloud.com",
+				pass: process.env.ICLOUD_SMTP_AUTH,
 			},
 		},
 	},
+	serverURL: process.env.PAYLOAD_CMS_URL ?? "http://localhost:3000",
 	typescript: {
 		outputFile: path.resolve(__dirname, "./payload-types.ts"),
 	},

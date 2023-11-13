@@ -1,11 +1,11 @@
 "use client"
 
-import { Button } from "/components/ui/button"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "/components/ui/form"
-import { Input } from "/components/ui/input"
-import { useAlert } from "/hooks/alert"
-import { CreateOptions, FormAPIResponse } from "/lib/types"
 import { zodResolver } from "@hookform/resolvers/zod"
+import { signUp } from "app/(user)/_utils"
+import { Button } from "components/ui/button"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "components/ui/form"
+import { Input } from "components/ui/input"
+import { useAlert } from "hooks/alert"
 import { Loader2 } from "lucide-react"
 import { useState } from "react"
 import { useForm } from "react-hook-form"
@@ -48,24 +48,14 @@ const SignUp = () => {
 	const { setError } = form
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
+		console.log(values)
 		setLoading(true)
 		try {
-			const user = await fetch("/api/auth/sign-up", {
-				method: "POST",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					name: values.name,
-					email: values.email,
-					password: values.password,
-				} satisfies CreateOptions<"users">),
-			})
-			const data = await user.json() as FormAPIResponse<keyof z.infer<typeof formSchema>>
+			const result = await signUp(values.name, values.username, values.email, values.password)
 
-			if (!user.ok) setError(data.field, { message: data.message })
+			if (!result.ok) setError(result.field, { message: result.message })
 			else {
-				addAlert("Signed up successfully!")
+				addAlert(`Successfully signed up as ${result.name}!`)
 				setTab("signin")
 			}
 		} catch (e) {

@@ -1,4 +1,4 @@
-import { AlertProvider } from "/hooks/alert"
+import { AlertProvider } from "hooks/alert"
 import { Metadata } from "next"
 import Auth from "./pageClient"
 import { TabProvider } from "./tabContext"
