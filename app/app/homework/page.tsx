@@ -15,8 +15,8 @@ const Homework = async () => {
 
 	return (
 		<>
-			<h1 className="font-semibold text-4xl">Homework</h1>
-			<div className="flex flex-col gap-4 my-4">
+			<h1 className="font-semibold text-4xl mb-4">Homework</h1>
+			<div className="flex flex-col gap-4">
 				<Suspense fallback={<Loading />}>
 					{homework.docs.map(hw => {
 						return (

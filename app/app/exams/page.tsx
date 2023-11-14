@@ -15,8 +15,8 @@ const Exams = async () => {
 
 	return (
 		<>
-			<h1 className="font-semibold text-4xl">Exams</h1>
-			<div className="flex flex-col gap-4 my-4">
+			<h1 className="font-semibold text-4xl mb-4">Exams</h1>
+			<div className="flex flex-col gap-4">
 				<Suspense fallback={<Loading />}>
 					{exams.docs.map(e => {
 						return (

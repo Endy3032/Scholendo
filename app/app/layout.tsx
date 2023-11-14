@@ -13,11 +13,11 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 					</ul>
 				</nav>
 			</header>
-			<div className="flex-1 flex flex-row">
-				<aside className="fixed h-full">
+			<div className="flex-1 flex flex-row overflow-hidden">
+				<aside className="h-full">
 					<NavBar />
 				</aside>
-				<main className="flex-1 max-w-6xl mx-auto px-4 mt-6">
+				<main className="flex-1 max-w-6xl mx-auto px-4 pt-6 pb-4 overflow-scroll">
 					{children}
 				</main>
 			</div>

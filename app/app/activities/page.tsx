@@ -15,8 +15,8 @@ const Activities = async () => {
 
 	return (
 		<>
-			<h1 className="font-semibold text-4xl">Activities</h1>
-			<div className="flex flex-col gap-4 my-4">
+			<h1 className="font-semibold text-4xl mb-4">Activities</h1>
+			<div className="flex flex-col gap-4">
 				<Suspense fallback={<Loading />}>
 					{activities.docs.map(a => {
 						return (
