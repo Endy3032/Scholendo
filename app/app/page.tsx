@@ -1,10 +1,8 @@
-"use client"
+import { Metadata } from "next"
+import Page from "./pageClient"
 
-import { useRouter } from "next/navigation"
-
-const Page = () => {
-	const router = useRouter()
-	router.replace("/app/homework")
+export const metadata: Metadata = {
+	title: "Class Hub",
 }
 
 export default Page

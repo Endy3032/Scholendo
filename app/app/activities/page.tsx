@@ -1,4 +1,4 @@
-import { Book, BookCheck, CalendarClock } from "lucide-react"
+import { CalendarClock } from "lucide-react"
 import getPayloadClient from "payload/client"
 import { Suspense } from "react"
 import Loading from "./loading"
