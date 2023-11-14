@@ -7,7 +7,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "components/ui/input"
 import { useAlert } from "hooks/alert"
 import { Loader2 } from "lucide-react"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
 import * as z from "zod"
 import styles from "../../styles.module.css"
@@ -33,6 +33,8 @@ const SignUp = () => {
 	const [loading, setLoading] = useState(false)
 	const { addAlert } = useAlert()
 	const { setTab } = useTab()
+
+	useEffect(() => addAlert("HH", "error"), [addAlert])
 
 	const form = useForm<z.infer<typeof formSchema>>({
 		resolver: zodResolver(formSchema),

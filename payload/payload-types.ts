@@ -10,6 +10,7 @@ export interface Config {
   collections: {
     activities: Activity;
     categories: Category;
+    exams: Exam;
     homework: Homework;
     subjects: Subject;
     timetable: Timetable;
@@ -38,6 +39,10 @@ export interface User {
   id: string;
   name: string;
   roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[] | null;
+  dateOfBirth?: string | null;
+  subject?: ('chemistry' | 'legals' | 'geography' | 'music' | 'art') | null;
+  language?: ('Chinese' | 'Japanese' | 'French') | null;
+  sports?: ('Aerobics' | 'Air Volleyball' | 'Basketball' | 'Martial Arts') | null;
   verified?: boolean | null;
   verificationToken?: string | null;
   updatedAt: string;
@@ -57,11 +62,11 @@ export interface Category {
   updatedAt: string;
   createdAt: string;
 }
-export interface Homework {
+export interface Exam {
   id: string;
-  subject?: (string | null) | Subject;
-  deadline?: string | null;
-  type?: ('BTVN' | 'TX - HS1' | 'GK - HS2') | null;
+  subject: string | Subject;
+  date: string;
+  type: 'TX - HS1' | 'GK - HS2' | 'CK - HS3';
   description?: string | null;
   notes?: string | null;
   details?:
@@ -74,8 +79,24 @@ export interface Homework {
 }
 export interface Subject {
   id: string;
-  subject?: string | null;
+  name: string;
   teacher?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+export interface Homework {
+  id: string;
+  name: string;
+  subject: string | Subject;
+  deadline: string;
+  type: 'BTVN' | 'TX - HS1' | 'GK - HS2';
+  description?: string | null;
+  notes?: string | null;
+  details?:
+    | {
+        [k: string]: unknown;
+      }[]
+    | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -84,7 +105,7 @@ export interface Timetable {
   subject?: (string | null) | Subject;
   day?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday') | null;
   session?: ('Morning' | 'Afternoon') | null;
-  period?: ('1' | '2' | '3' | '4' | '5') | null;
+  period?: ('1' | '2' | '3' | '4' | '5')[] | null;
   updatedAt: string;
   createdAt: string;
 }

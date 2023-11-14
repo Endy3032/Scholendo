@@ -1,14 +1,9 @@
 import type { CollectionConfig } from "payload/types"
 
-const Homework: CollectionConfig = {
-	slug: "homework",
+const Exams: CollectionConfig = {
+	slug: "exams",
 	admin: { useAsTitle: "name" },
 	fields: [
-		{
-			name: "name",
-			type: "text",
-			required: true,
-		},
 		{
 			name: "subject",
 			type: "relationship",
@@ -16,14 +11,14 @@ const Homework: CollectionConfig = {
 			required: true,
 		},
 		{
-			name: "deadline",
+			name: "date",
 			type: "date",
 			required: true,
 		},
 		{
 			name: "type",
 			type: "select",
-			options: ["BTVN", "TX - HS1", "GK - HS2"],
+			options: ["TX - HS1", "GK - HS2", "CK - HS3"],
 			required: true,
 		},
 		{
@@ -41,4 +36,4 @@ const Homework: CollectionConfig = {
 	],
 }
 
-export default Homework
+export default Exams

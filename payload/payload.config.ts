@@ -4,6 +4,7 @@ import path from "path"
 import { buildConfig } from "payload/config"
 import Activites from "./collections/Activities"
 import Categories from "./collections/Categories"
+import Exams from "./collections/Exams"
 import Homework from "./collections/Homework"
 import Subjects from "./collections/Subjects"
 import Timetable from "./collections/Timetable"
@@ -13,6 +14,7 @@ export default buildConfig({
 	collections: [
 		Activites,
 		Categories,
+		Exams,
 		Homework,
 		Subjects,
 		Timetable,

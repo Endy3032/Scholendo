@@ -61,7 +61,7 @@ const Auth = () => {
 					</TabsContent>
 				</Tabs>
 			</div>
-			<div className="fixed top-0 right-0 p-6 m-0 max-w-sm flex flex-col items-end gap-4 overflow-scroll max-h-screen">
+			<div className="fixed top-0 right-0 p-6 m-0 max-w-sm flex flex-col items-end gap-4 overflow-auto max-h-screen">
 				{alerts.slice().reverse().map(e => (
 					<Alert
 						className={`flex flex-row gap-2 max-w-max backdrop-blur-sm bg-opacity-30 ${

@@ -1,13 +1,9 @@
 import type { User } from "payload/generated-types"
 import type { FieldHook } from "payload/types"
 
-export const ensureFirstUserIsAdmin: FieldHook<User, any[]> = async ({ req, operation, value }) => {
-	if (operation !== "create") return value || []
+export const ensureFirstUserIsAdmin: FieldHook<User, any[]> = async ({ req, value }) => {
+	const users = await req.payload.find({ collection: "users", where: { roles: { contains: "admin" } } })
+	if (users.totalDocs === 0 && !(value || []).includes("admin")) return [...(value || []), "admin"]
 
-	const users = await req.payload.find({ collection: "users", limit: 0, depth: 0 })
-	if (users.totalDocs !== 0) return value || []
-
-	if (!(value || []).includes("admin")) return [...(value || []), "admin"]
-
-	return []
+	return value || []
 }

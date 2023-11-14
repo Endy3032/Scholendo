@@ -4,14 +4,16 @@ const Subjects: CollectionConfig = {
 	slug: "subjects",
 	fields: [
 		{
-			name: "subject",
+			name: "name",
 			type: "text",
+			required: true,
 		},
 		{
 			name: "teacher",
 			type: "text",
 		},
 	],
+	admin: { useAsTitle: "name" },
 }
 
 export default Subjects

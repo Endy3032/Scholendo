@@ -85,6 +85,46 @@ const Users: CollectionConfig = {
 			},
 		},
 		{
+			name: "dateOfBirth",
+			type: "date",
+		},
+		{
+			name: "subject",
+			type: "select",
+			options: [
+				{
+					label: "Hoá Học",
+					value: "chemistry",
+				},
+				{
+					label: "GDKT-PL",
+					value: "legals",
+				},
+				{
+					label: "Địa Lý",
+					value: "geography",
+				},
+				{
+					label: "Âm Nhạc",
+					value: "music",
+				},
+				{
+					label: "Mỹ Thuật",
+					value: "art",
+				},
+			],
+		},
+		{
+			name: "language",
+			type: "select",
+			options: ["Chinese", "Japanese", "French"],
+		},
+		{
+			name: "sports",
+			type: "select",
+			options: ["Aerobics", "Air Volleyball", "Basketball", "Martial Arts"],
+		},
+		{
 			name: "verified",
 			type: "checkbox",
 			hidden: true,
