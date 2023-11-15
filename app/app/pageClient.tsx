@@ -1,10 +1,11 @@
 "use client"
 
 import { useRouter } from "next/navigation"
+import { useEffect } from "react"
 
 const Page = () => {
 	const router = useRouter()
-	router.replace("/app/homework")
+	useEffect(() => router.replace("/app/homework"), [router])
 }
 
 export default Page

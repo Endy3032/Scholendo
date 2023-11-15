@@ -3,6 +3,8 @@ import getPayloadClient from "payload/client"
 import { Suspense } from "react"
 import Loading from "./loading"
 
+export const dynamic = "force-dynamic"
+
 const Exams = async () => {
 	const payload = await getPayloadClient()
 

@@ -17,7 +17,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				<aside className="h-full">
 					<NavBar />
 				</aside>
-				<main className="flex-1 max-w-6xl mx-auto px-4 pt-6 pb-4 overflow-scroll">
+				<main className="flex-1 max-w-6xl mx-auto px-4 pt-6 pb-4 overflow-y-scroll">
 					{children}
 				</main>
 			</div>

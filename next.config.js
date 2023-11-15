@@ -10,7 +10,7 @@ const nextConfig = withPayload(
 		eslint: {
 			ignoreDuringBuilds: true,
 		},
-		reactStrictMode: true,
+		reactStrictMode: false,
 		images: {
 			domains: [
 				"localhost",
