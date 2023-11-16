@@ -13,5 +13,5 @@ export async function POST(request: NextRequest) {
 	const searchResult = await fetch(`${process.env.PAYLOAD_CMS_URL}/api/users?${searchQuery}`)
 	const { data: search } = await searchResult.json() as { data: PaginatedDocs<User> }
 
-	return NextResponse.json(search)
+	return NextResponse.json({ id: search.docs[0].id })
 }
