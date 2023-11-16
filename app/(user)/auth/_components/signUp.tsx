@@ -1,7 +1,7 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
-import { signUp } from "app/(user)/_utils"
+// import { signUp } from "app/(user)/_utils"
 import { Button } from "components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "components/ui/form"
 import { Input } from "components/ui/input"
@@ -53,7 +53,13 @@ const SignUp = () => {
 		console.log(values)
 		setLoading(true)
 		try {
-			const result = await signUp(values.name, values.username, values.email, values.password)
+			const result = await fetch("/api/signup", {
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(values),
+			}).then(res => res.json())
 
 			if (!result.ok) setError(result.field, { message: result.message })
 			else {

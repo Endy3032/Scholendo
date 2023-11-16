@@ -9,7 +9,7 @@ import { useAuth } from "hooks/auth"
 import { AlertCircle, UserCheck2, X } from "lucide-react"
 import { useRouter } from "next/navigation"
 import styles from "../styles.module.css"
-import SignIn from "./_components/signIn"
+// import SignIn from "./_components/signIn"
 import SignUp from "./_components/signUp"
 import { useTab } from "./tabContext"
 
@@ -55,7 +55,7 @@ const Auth = () => {
 								<CardDescription>Sign in to an existing account</CardDescription>
 							</CardHeader>
 							<CardContent>
-								<SignIn />
+								{/* <SignIn /> */}
 							</CardContent>
 						</Card>
 					</TabsContent>
