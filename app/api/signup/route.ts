@@ -10,7 +10,7 @@ export async function POST(request: NextRequest) {
 	console.log(name, email, password)
 
 	const searchQuery = qs.stringify({ where: { email: { equals: email } } })
-	const searchResult = await fetch(`http://localhost:3000/api/users?${searchQuery}`)
+	const searchResult = await fetch(`${process.env.PAYLOAD_CMS_URL}/api/users?${searchQuery}`)
 	const { data: search } = await searchResult.json() as { data: PaginatedDocs<User> }
 
 	return NextResponse.json(search)
