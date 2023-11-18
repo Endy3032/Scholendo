@@ -1,11 +1,13 @@
 "use client"
 
 import { zodResolver } from "@hookform/resolvers/zod"
+import axios from "axios"
 // import { signUp } from "app/(user)/_utils"
 import { Button } from "components/ui/button"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "components/ui/form"
 import { Input } from "components/ui/input"
 import { useAlert } from "hooks/alert"
+import { CreateOptions, FormAPIResponse } from "lib/types"
 import { Loader2 } from "lucide-react"
 import { useEffect, useState } from "react"
 import { useForm } from "react-hook-form"
@@ -50,20 +52,27 @@ const SignUp = () => {
 	const { setError } = form
 
 	async function onSubmit(values: z.infer<typeof formSchema>) {
-		console.log(values)
 		setLoading(true)
 		try {
-			const result = await fetch("/api/signup", {
+			const user = await fetch("/api/auth/sign-up", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify(values),
-			}).then(res => res.json())
+				body: JSON.stringify({
+					name: values.name,
+					email: values.email,
+					password: values.password,
+				} satisfies CreateOptions<"users">),
+			})
+			const data = await user.json() as FormAPIResponse<keyof z.infer<typeof formSchema>>
 
-			if (!result.ok) setError(result.field, { message: result.message })
+			const teststs = await axios.get("/api/users?where[email][equals]=nguyenminhhoang0603@gmail.com")
+			console.log(teststs)
+
+			if (!user.ok) setError(data.field, { message: data.message })
 			else {
-				addAlert(`Successfully signed up as ${result.name}!`)
+				addAlert("Signed up successfully!")
 				setTab("signin")
 			}
 		} catch (e) {
