@@ -54,7 +54,7 @@ const SignUp = () => {
 	async function onSubmit(values: z.infer<typeof formSchema>) {
 		setLoading(true)
 		try {
-			const user = await fetch("/api/auth/sign-up", {
+			const user = await fetch("/api/signup", {
 				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
