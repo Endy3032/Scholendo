@@ -16,7 +16,7 @@ import { useTab } from "./tabContext"
 const Auth = () => {
 	const router = useRouter()
 	const { isSignedIn, isLoading } = useAuth()
-	const { alerts, addAlert, removeAlert } = useAlert()
+	const { alerts, removeAlert } = useAlert()
 	const { tab, setTab } = useTab()
 
 	if (isSignedIn && !isLoading) {

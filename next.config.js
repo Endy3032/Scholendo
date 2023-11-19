@@ -2,25 +2,22 @@ const { withPayload } = require("@payloadcms/next-payload")
 const path = require("path")
 
 /** @type {import('next').NextConfig} */
-const nextConfig = withPayload(
-	{
-		experimental: {
-			typedRoutes: true,
-		},
-		eslint: {
-			ignoreDuringBuilds: true,
-		},
-		reactStrictMode: false,
-		images: {
-			domains: [
-				"localhost",
-				process.env.NEXT_PUBLIC_APP_URL,
-			],
-		},
+const nextConfig = {
+	experimental: {
+		typedRoutes: true,
+		serverActions: true,
 	},
-	{
-		configPath: path.resolve(__dirname, "payload", "payload.config.ts"),
+	eslint: {
+		ignoreDuringBuilds: true,
 	},
-)
+	reactStrictMode: false,
+	images: {
+		domains: [
+			"localhost",
+			process.env.NEXT_PUBLIC_APP_URL,
+		],
+	},
+}
 
-module.exports = nextConfig
+
+module.exports = withPayload(nextConfig, { configPath: path.resolve(__dirname, "payload", "payload.config.ts") })
