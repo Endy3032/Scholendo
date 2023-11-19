@@ -1,7 +1,7 @@
 import { BookCheck, CalendarClock } from "lucide-react"
 import getPayloadClient from "payload/client"
 import { Suspense } from "react"
-import Loading from "./loading"
+import Loading from "../_components/listLoading"
 
 export const dynamic = "force-dynamic"
 
@@ -19,18 +19,18 @@ const Exams = async () => {
 		<>
 			<h1 className="font-semibold text-4xl mb-4">Exams</h1>
 			<div className="flex flex-col gap-4">
-				<Suspense fallback={<Loading />}>
+				<Suspense fallback={<Loading text="Exams" />}>
 					{exams.docs.map(e => {
 						return (
 							<div key={e.id} className="flex flex-col gap-2 bg-slate-900 p-4 rounded-md">
 								<h1 className="font-medium">{typeof e.subject === "string" ? e.subject : e.subject?.name}</h1>
 								<div className="flex flex-wrap gap-3 text-muted-foreground mb-1 text-sm">
 									<span className="flex gap-1">
-										<BookCheck className="w-5 h-5" />
+										<BookCheck size={20} />
 										{e.type}
 									</span>
 									<span className="flex gap-1">
-										<CalendarClock className="w-5 h-5" />
+										<CalendarClock size={20} />
 										{new Date(e.date).toLocaleDateString("vi-VN")}
 									</span>
 								</div>

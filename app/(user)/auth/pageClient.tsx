@@ -76,11 +76,11 @@ const Auth = () => {
 									{e.type === "error"
 										? (
 											<div>
-												<AlertCircle className="absolute h-4 w-4 animate-[ping_1.5s_ease-out_infinite]" />
-												<AlertCircle className="h-4 w-4" />
+												<AlertCircle className="absolute  animate-[ping_1.5s_ease-out_infinite]" size={16} />
+												<AlertCircle className="" size={16} />
 											</div>
 										)
-										: <UserCheck2 className="h-4 w-4" />}
+										: <UserCheck2 className="" size={16} />}
 									{e.type === "error" ? "Error" : "Success"}
 								</div>
 							</AlertTitle>
