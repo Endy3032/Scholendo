@@ -1,5 +1,5 @@
 import Link from "next/link"
-import NavBar from "./_components/navBar"
+import Sidebar from "./_components/sidebar"
 
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
@@ -13,11 +13,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 					</ul>
 				</nav>
 			</header>
-			<div className="flex-1 flex flex-row overflow-hidden">
-				<aside className="h-full">
-					<NavBar />
-				</aside>
-				<main className="flex-1 max-w-6xl mx-auto px-4 pt-6 pb-4 overflow-y-scroll">
+			<div className="flex-1 flex flex-col sm:flex-row overflow-hidden">
+				<Sidebar />
+				<main className="flex-1 w-full max-w-6xl mx-auto px-4 pt-6 pb-4 overflow-y-scroll">
 					{children}
 				</main>
 			</div>
