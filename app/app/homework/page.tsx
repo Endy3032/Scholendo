@@ -27,7 +27,7 @@ const Homework = async () => {
 								<div className="flex flex-wrap gap-3 text-muted-foreground mb-1 text-sm">
 									<span className="flex gap-1">
 										<Book className="w-5 h-5" />
-										{typeof hw.subject == "string" ? hw.subject : hw.subject?.name}
+										{typeof hw.subject === "string" ? hw.subject : hw.subject?.name}
 									</span>
 									<span className="flex gap-1">
 										<BookCheck className="w-5 h-5" />

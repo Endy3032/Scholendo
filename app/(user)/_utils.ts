@@ -1,19 +1,15 @@
 "use server"
 
-import { convertSlateNodesToLexical } from "@payloadcms/richtext-lexical"
 import crypto from "crypto"
 import { cookies } from "next/headers"
 import getPayloadClient from "payload/client"
-import { PaginatedDocs } from "payload/database"
-import { User } from "payload/generated-types"
 
 type SignUpResult = { ok: false; field: "email"; message: string } | { ok: true; name: string; id: string }
 
 export async function signUp(name: string, username: string, email: string, password: string): Promise<SignUpResult> {
 	const payload = await getPayloadClient()
-	let search: PaginatedDocs<User>
 
-	search = await payload.find({
+	const search = await payload.find({
 		collection: "users",
 		where: { email: { equals: email } },
 	})

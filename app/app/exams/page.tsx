@@ -23,7 +23,7 @@ const Exams = async () => {
 					{exams.docs.map(e => {
 						return (
 							<div key={e.id} className="flex flex-col gap-2 bg-slate-900 p-4 rounded-md">
-								<h1 className="font-medium">{typeof e.subject == "string" ? e.subject : e.subject?.name}</h1>
+								<h1 className="font-medium">{typeof e.subject === "string" ? e.subject : e.subject?.name}</h1>
 								<div className="flex flex-wrap gap-3 text-muted-foreground mb-1 text-sm">
 									<span className="flex gap-1">
 										<BookCheck className="w-5 h-5" />
