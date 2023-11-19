@@ -102,10 +102,15 @@ export interface Homework {
 }
 export interface Timetable {
   id: string;
-  subject?: (string | null) | Subject;
-  day?: ('Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday') | null;
-  session?: ('Morning' | 'Afternoon') | null;
-  period?: ('1' | '2' | '3' | '4' | '5')[] | null;
+  subject: string | Subject;
+  periods: {
+    periodGroup: {
+      day: 'Monday' | 'Tuesday' | 'Wednesday' | 'Thursday' | 'Friday';
+      session: 'Morning' | 'Afternoon';
+      period: ('1' | '2' | '3' | '4' | '5')[];
+    };
+    id?: string | null;
+  }[];
   updatedAt: string;
   createdAt: string;
 }
