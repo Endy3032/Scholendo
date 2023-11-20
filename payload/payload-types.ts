@@ -38,9 +38,9 @@ export interface Activity {
 export interface User {
   id: string;
   name: string;
-  roles?: ('admin' | 'staff' | 'lpkl' | 'lpht' | 'lpds' | 'lppt' | 'groupLeader' | 'student')[] | null;
+  roles?: ('Admin' | 'Site Staff' | 'Class Moderator' | 'Student')[] | null;
   dateOfBirth?: string | null;
-  subject?: ('chemistry' | 'legals' | 'geography' | 'music' | 'art') | null;
+  subject?: ('Chemistry' | 'Geography' | 'Music' | 'Arts' | 'Economics and Law') | null;
   language?: ('Chinese' | 'Japanese' | 'French') | null;
   sports?: ('Aerobics' | 'Air Volleyball' | 'Basketball' | 'Martial Arts') | null;
   verified?: boolean | null;

@@ -1,21 +1,9 @@
-import type { User } from "payload/generated-types"
 import { CollectionConfig } from "payload/types"
-import { admins, adminsOrSameUser, anyone } from "./access"
-import { ensureFirstUserIsAdmin } from "./hooks/ensureFirstUserIsAdmin"
-
-export const checkRoles = (roles: NonNullable<User["roles"]> = [], user?: User | null) =>
-	roles.some(role => user?.roles?.includes(role))
+import { admins, adminsOrSameUser, anyone, staffs } from "./access"
+import { ensureFirstUserIsAdmin } from "./hooks"
 
 const Users: CollectionConfig = {
-	auth: {
-		// verify: {
-		// 	generateEmailSubject: () => `Verify your email - CTin2225`,
-		// 	generateEmailHTML: ({ token, user }: { token: string; user: User }) => {
-		// 		const url = `${process.env.NEXT_PUBLIC_APP_URL}/verify-email?token=${token}`
-		// 		return `Hey ${user.name}, click <a href="${url}">here</a> to verify your email!`
-		// 	},
-		// },
-	},
+	auth: true,
 	slug: "users",
 	admin: {
 		useAsTitle: "name",
@@ -26,8 +14,8 @@ const Users: CollectionConfig = {
 		read: anyone,
 		update: adminsOrSameUser,
 		delete: adminsOrSameUser,
-		readVersions: adminsOrSameUser,
 		unlock: admins,
+		admin: staffs,
 	},
 	fields: [
 		{
@@ -43,41 +31,8 @@ const Users: CollectionConfig = {
 			hooks: {
 				beforeChange: [ensureFirstUserIsAdmin],
 			},
-			defaultValue: ["student"],
-			options: [
-				{
-					label: "Admin",
-					value: "admin",
-				},
-				{
-					label: "Staff",
-					value: "staff",
-				},
-				{
-					label: "LPKL",
-					value: "lpkl",
-				},
-				{
-					label: "LPHT",
-					value: "lpht",
-				},
-				{
-					label: "LPĐS",
-					value: "lpds",
-				},
-				{
-					label: "LPPT",
-					value: "lppt",
-				},
-				{
-					label: "Tổ Trưởng",
-					value: "groupLeader",
-				},
-				{
-					label: "Student",
-					value: "student",
-				},
-			],
+			defaultValue: ["Student"],
+			options: ["Admin", "Site Staff", "Class Moderator", "Student"],
 			access: {
 				read: anyone,
 				create: admins,
@@ -91,28 +46,7 @@ const Users: CollectionConfig = {
 		{
 			name: "subject",
 			type: "select",
-			options: [
-				{
-					label: "Hoá Học",
-					value: "chemistry",
-				},
-				{
-					label: "GDKT-PL",
-					value: "legals",
-				},
-				{
-					label: "Địa Lý",
-					value: "geography",
-				},
-				{
-					label: "Âm Nhạc",
-					value: "music",
-				},
-				{
-					label: "Mỹ Thuật",
-					value: "art",
-				},
-			],
+			options: ["Chemistry", "Geography", "Music", "Arts", "Economics and Law"],
 		},
 		{
 			name: "language",

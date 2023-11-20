@@ -28,7 +28,7 @@ export async function signUp(name: string, username: string, email: string, pass
 			name,
 			email,
 			password,
-			roles: ["student"],
+			roles: ["Student"],
 			verified: false,
 			verificationToken: crypto.randomBytes(32).toString("hex"),
 		},
