@@ -2,6 +2,10 @@ import { CollectionConfig } from "payload/types"
 import { admins, adminsOrSameUser, anyone, staffs } from "./access"
 import { ensureFirstUserIsAdmin } from "./hooks"
 
+export const subjects = ["Arts", "Chemistry", "Economics and Law", "Geography", "Music"] as const
+export const languages = ["Chinese", "French", "Japanese"] as const
+export const sports = ["Aerobics", "Air Volleyball", "Basketball", "Martial Arts"] as const
+
 const Users: CollectionConfig = {
 	auth: true,
 	slug: "users",
@@ -46,17 +50,17 @@ const Users: CollectionConfig = {
 		{
 			name: "subject",
 			type: "select",
-			options: ["Chemistry", "Geography", "Music", "Arts", "Economics and Law"],
+			options: [...subjects],
 		},
 		{
 			name: "language",
 			type: "select",
-			options: ["Chinese", "Japanese", "French"],
+			options: [...languages],
 		},
 		{
 			name: "sports",
 			type: "select",
-			options: ["Aerobics", "Air Volleyball", "Basketball", "Martial Arts"],
+			options: [...sports],
 		},
 		{
 			name: "verified",
