@@ -10,4 +10,13 @@
 	"files.associations": {
 		"*.css": "tailwindcss",
 	},
+	"files.exclude": {
+		".next": true,
+		"pages": true,
+		"node_modules": true,
+		".env.example": true,
+		"next-env.d.ts": true,
+		"postcss.config.js": true,
+		"yarn.lock": true
+	}
 }
