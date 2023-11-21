@@ -13,6 +13,7 @@ const Exams: CollectionConfig = {
 		{
 			name: "date",
 			type: "date",
+			index: true,
 			required: true,
 		},
 		{

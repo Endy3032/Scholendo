@@ -18,6 +18,7 @@ const Homework: CollectionConfig = {
 		{
 			name: "deadline",
 			type: "date",
+			index: true,
 			required: true,
 		},
 		{

@@ -28,8 +28,21 @@ const Users: CollectionConfig = {
 			required: true,
 		},
 		{
+			name: "email",
+			type: "email",
+			required: true,
+			unique: true,
+			index: true,
+		},
+		{
+			name: "username",
+			type: "text",
+			required: false,
+		},
+		{
 			name: "roles",
 			type: "select",
+			index: true,
 			hasMany: true,
 			saveToJWT: true,
 			hooks: {

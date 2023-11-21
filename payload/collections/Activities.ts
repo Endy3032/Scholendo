@@ -11,6 +11,7 @@ const Activites: CollectionConfig = {
 		{
 			name: "date",
 			type: "date",
+			index: true,
 			required: true,
 			admin: {
 				date: {

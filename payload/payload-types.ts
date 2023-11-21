@@ -38,10 +38,11 @@ export interface Activity {
 export interface User {
   id: string;
   name: string;
+  username?: string | null;
   roles?: ('Admin' | 'Site Staff' | 'Class Moderator' | 'Student')[] | null;
   dateOfBirth?: string | null;
-  subject?: ('Chemistry' | 'Geography' | 'Music' | 'Arts' | 'Economics and Law') | null;
-  language?: ('Chinese' | 'Japanese' | 'French') | null;
+  subject?: ('Arts' | 'Chemistry' | 'Economics and Law' | 'Geography' | 'Music') | null;
+  language?: ('Chinese' | 'French' | 'Japanese') | null;
   sports?: ('Aerobics' | 'Air Volleyball' | 'Basketball' | 'Martial Arts') | null;
   verified?: boolean | null;
   verificationToken?: string | null;
