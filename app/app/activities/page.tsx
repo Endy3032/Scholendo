@@ -1,6 +1,9 @@
-import { CalendarClock } from "lucide-react"
+import { Skeleton } from "components/ui/skeleton"
+import { BarChartBig, Book, CalendarClock } from "lucide-react"
 import getPayloadClient from "payload/client"
 import { Suspense } from "react"
+import InfoBadge from "../_components/infoBadge"
+import ListItem from "../_components/listItem"
 import Loading from "../_components/listLoading"
 
 export const dynamic = "force-dynamic"
@@ -16,41 +19,40 @@ const Activities = async () => {
 	})
 
 	return (
-		<>
-			<h1 className="font-semibold text-4xl mb-4">Activities</h1>
+		<div className="flex flex-col gap-4">
+			<h1 className="font-semibold text-4xl">Activities</h1>
+			<div className="flex flex-col gap-1">
+				<span className="flex items-center gap-1 text-2xl">
+					<BarChartBig />
+					Statistics
+				</span>
+				<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
+					<InfoBadge Icon={Book}
+						content={`${activities.docs.length} remaining activit${activities.docs.length > 1 && "ies" || "y"}`} />
+					<InfoBadge
+						Icon={CalendarClock}
+						content={`${
+							activities.docs.filter(a => (new Date(a.date).getTime() - new Date().getTime()) / 86400000 < 7).length
+						} this week`}
+					/>
+				</div>
+			</div>
 			<div className="flex flex-col gap-4">
-				<Suspense fallback={<Loading text="Activities" />}>
+				<Suspense fallback={
+					<Loading>
+						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4" />} />
+					</Loading>
+				}>
 					{activities.docs.map(a => {
 						return (
-							<div key={a.id} className="flex flex-col gap-2 bg-slate-900 p-4 rounded-md">
-								<h1 className="font-medium">{a.name}</h1>
-								<div className="flex flex-wrap gap-3 text-muted-foreground mb-1 text-sm">
-									<span className="flex gap-1">
-										<CalendarClock size={20} />
-										{new Date(a.date).toLocaleDateString("vi-VN")}
-									</span>
-								</div>
-								{a.info
-									? (
-										<div>
-											<h2>Nội dung</h2>
-											<p className="whitespace-pre-wrap">{a.info}</p>
-										</div>
-									)
-									: undefined}
-								{a.participants
-									? (
-										<ul>
-											{a.participants.map(p => <li key={typeof p === "string" ? p : p.id}>{typeof p === "string" ? p : p.name}</li>)}
-										</ul>
-									)
-									: undefined}
-							</div>
+							<ListItem value={a.id} key={a.id} title={a.name} content={a.info} participants={a.participants}>
+								<InfoBadge Icon={CalendarClock} content={new Date(a.date).toLocaleDateString("vi-VN")} />
+							</ListItem>
 						)
 					})}
 				</Suspense>
 			</div>
-		</>
+		</div>
 	)
 }
 
