@@ -8,7 +8,7 @@ import Loading from "../_components/listLoading"
 
 export const dynamic = "force-dynamic"
 
-const Homework = async () => {
+const HomeworkList = async () => {
 	const payload = await getPayloadClient()
 
 	const homework = await payload.find({
@@ -32,8 +32,7 @@ const Homework = async () => {
 	const wk = diffs.filter(d => d < 7).length
 
 	return (
-		<div className="flex flex-col gap-4">
-			<h2 className="font-semibold text-4xl">Homework</h2>
+		<>
 			<div className="flex flex-col gap-1">
 				<span className="flex items-center gap-1 text-2xl">
 					<BarChartBig />
@@ -47,28 +46,53 @@ const Homework = async () => {
 				</div>
 			</div>
 			<div className="flex flex-col gap-3">
-				<Suspense fallback={
-					<Loading>
-						<InfoBadge Icon={Book} content={<Skeleton className="w-20 h-4" />} />
-						<InfoBadge Icon={BookCheck} content={<Skeleton className="w-16 h-4" />} />
-						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-24 h-4" />} />
-					</Loading>
-				}>
-					{homework.docs.length
-							&& homework.docs.map(hw => {
-								const hwDate = new Date(hw.deadline)
-								const diff = Math.ceil((hwDate.getTime() - new Date().getTime()) / 86_400_000)
+				{homework.docs.length
+						&& homework.docs.map(hw => {
+							const hwDate = new Date(hw.deadline)
+							const diff = Math.ceil((hwDate.getTime() - new Date().getTime()) / 86_400_000)
 
-								return (
-									<ListItem key={hw.id} value={hw.id} diff={diff} title={hw.name} content={hw.description} notes={hw.notes}>
-										<InfoBadge Icon={Book} content={typeof hw.subject === "string" ? hw.subject : hw.subject?.name} />
-										<InfoBadge Icon={BookCheck} content={hw.type} />
-										<InfoBadge Icon={CalendarClock} content={hwDate.toLocaleDateString("vi-VN")} />
-									</ListItem>
-								)
-							}) || "No homework left!"}
-				</Suspense>
+							return (
+								<ListItem key={hw.id} value={hw.id} diff={diff} title={hw.name} content={hw.description} notes={hw.notes}>
+									<InfoBadge Icon={Book} content={typeof hw.subject === "string" ? hw.subject : hw.subject?.name} />
+									<InfoBadge Icon={BookCheck} content={hw.type} />
+									<InfoBadge Icon={CalendarClock} content={hwDate.toLocaleDateString("vi-VN")} />
+								</ListItem>
+							)
+						}) || "No homework left!"}
 			</div>
+		</>
+	)
+}
+
+const Homework = async () => {
+	return (
+		<div className="flex flex-col gap-4">
+			<h2 className="font-semibold text-4xl">Homework</h2>
+			<Suspense fallback={
+				<>
+					<div className="flex flex-col gap-1">
+						<span className="flex items-center gap-1 text-2xl">
+							<BarChartBig />
+							Statistics
+						</span>
+						<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
+							<InfoBadge Icon={Book} content={<Skeleton className="w-36 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-14 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4 my-1" />} />
+						</div>
+					</div>
+					<div className="flex flex-col gap-3">
+						<Loading>
+							<InfoBadge Icon={Book} content={<Skeleton className="w-20 h-4" />} />
+							<InfoBadge Icon={BookCheck} content={<Skeleton className="w-16 h-4" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-24 h-4" />} />
+						</Loading>
+					</div>
+				</>
+			}>
+				<HomeworkList />
+			</Suspense>
 		</div>
 	)
 }

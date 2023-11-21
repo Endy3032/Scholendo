@@ -8,7 +8,7 @@ import Loading from "../_components/listLoading"
 
 export const dynamic = "force-dynamic"
 
-const Activities = async () => {
+const ActivitiesList = async () => {
 	const payload = await getPayloadClient()
 
 	const activities = await payload.find({
@@ -32,8 +32,7 @@ const Activities = async () => {
 	const wk = diffs.filter(d => d < 7).length
 
 	return (
-		<div className="flex flex-col gap-4">
-			<h1 className="font-semibold text-4xl">Activities</h1>
+		<>
 			<div className="flex flex-col gap-1">
 				<span className="flex items-center gap-1 text-2xl">
 					<BarChartBig />
@@ -47,20 +46,45 @@ const Activities = async () => {
 					<InfoBadge Icon={CalendarClock} content={`${wk} this week`} />
 				</div>
 			</div>
-			<div className="flex flex-col gap-4">
-				<Suspense fallback={
-					<Loading>
-						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4" />} />
-					</Loading>
-				}>
-					{activities.docs.length
-							&& activities.docs.map(a => (
-								<ListItem value={a.id} key={a.id} title={a.name} content={a.info} participants={a.participants}>
-									<InfoBadge Icon={CalendarClock} content={new Date(a.date).toLocaleDateString("vi-VN")} />
-								</ListItem>
-							)) || "No activities left!"}
-				</Suspense>
+			<div className="flex flex-col gap-3">
+				{activities.docs.length
+						&& activities.docs.map(a => (
+							<ListItem value={a.id} key={a.id} title={a.name} content={a.info} participants={a.participants}>
+								<InfoBadge Icon={CalendarClock} content={new Date(a.date).toLocaleDateString("vi-VN")} />
+							</ListItem>
+						)) || "No activities left!"}
 			</div>
+		</>
+	)
+}
+
+const Activities = async () => {
+	return (
+		<div className="flex flex-col gap-4">
+			<h1 className="font-semibold text-4xl">Activities</h1>
+			<Suspense fallback={
+				<>
+					<div className="flex flex-col gap-1">
+						<span className="flex items-center gap-1 text-2xl">
+							<BarChartBig />
+							Statistics
+						</span>
+						<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
+							<InfoBadge Icon={Book} content={<Skeleton className="w-36 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-14 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4 my-1" />} />
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4 my-1" />} />
+						</div>
+					</div>
+					<div className="flex flex-col gap-3">
+						<Loading>
+							<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4" />} />
+						</Loading>
+					</div>
+				</>
+			}>
+				<ActivitiesList />
+			</Suspense>
 		</div>
 	)
 }
