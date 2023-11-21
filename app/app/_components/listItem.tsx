@@ -49,7 +49,7 @@ type ListItemProps = {
 }
 
 const ListItem = ({ diff, value, title, content, notes, participants, children }: ListItemProps) => {
-	if (!diff) diff = 7
+	if (diff === undefined) diff = 7
 
 	if (!content && !notes && !participants) {
 		return (

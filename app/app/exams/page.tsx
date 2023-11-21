@@ -16,7 +16,20 @@ const Exams = async () => {
 		limit: 10,
 		pagination: true,
 		sort: "date",
+		where: {
+			date: {
+				greater_than_equal: new Date(new Date().setUTCHours(0, 0, 0, 0)).toISOString(),
+			},
+		},
 	})
+
+	const diffs = exams.docs
+		.map(e => Math.ceil((new Date(e.date).getTime() - new Date().getTime()) / 86_400_000))
+		.filter(d => d >= 0)
+
+	const today = diffs.filter(d => d === 0).length
+	const tmr = diffs.filter(d => d === 1).length
+	const week = diffs.filter(d => d < 7).length
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -28,10 +41,9 @@ const Exams = async () => {
 				</span>
 				<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
 					<InfoBadge Icon={Book} content={`${exams.docs.length} remaining exam${exams.docs.length > 1 && "s"}`} />
-					<InfoBadge
-						Icon={CalendarClock}
-						content={`${exams.docs.filter(a => (new Date(a.date).getTime() - new Date().getTime()) / 86400000 < 7).length} this week`}
-					/>
+					<InfoBadge Icon={CalendarClock} content={`${today} today`} />
+					<InfoBadge Icon={CalendarClock} content={`${tmr} tomorrow`} />
+					<InfoBadge Icon={CalendarClock} content={`${week} this week`} />
 				</div>
 			</div>
 			<div className="flex flex-col gap-4">
@@ -41,24 +53,25 @@ const Exams = async () => {
 						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4" />} />
 					</Loading>
 				}>
-					{exams.docs.map(e => {
-						const examDate = new Date(e.date), date = new Date()
-						const diff = Math.ceil((examDate.getTime() - date.getTime()) / (3600 * 24 * 1000))
+					{exams.docs.length
+							&& exams.docs.map(e => {
+								const examDate = new Date(e.date)
+								const diff = Math.ceil((examDate.getTime() - new Date().getTime()) / 86_400_000)
 
-						return (
-							<ListItem
-								value={e.id}
-								title={typeof e.subject === "string" ? e.subject : e.subject?.name}
-								key={e.id}
-								diff={diff}
-								content={e.description}
-								notes={e.notes}
-							>
-								<InfoBadge Icon={BookCheck} content={e.type} />
-								<InfoBadge Icon={CalendarClock} content={new Date(e.date).toLocaleDateString("vi-VN")} />
-							</ListItem>
-						)
-					})}
+								return (
+									<ListItem
+										value={e.id}
+										title={typeof e.subject === "string" ? e.subject : e.subject?.name}
+										key={e.id}
+										diff={diff}
+										content={e.description}
+										notes={e.notes}
+									>
+										<InfoBadge Icon={BookCheck} content={e.type} />
+										<InfoBadge Icon={CalendarClock} content={new Date(e.date).toLocaleDateString("vi-VN")} />
+									</ListItem>
+								)
+							}) || "No exams left!"}
 				</Suspense>
 			</div>
 		</div>

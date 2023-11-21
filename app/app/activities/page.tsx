@@ -16,7 +16,20 @@ const Activities = async () => {
 		limit: 10,
 		pagination: true,
 		sort: "date",
+		where: {
+			date: {
+				greater_than_equal: new Date(new Date().setUTCHours(0, 0, 0, 0)).toISOString(),
+			},
+		},
 	})
+
+	const diffs = activities.docs
+		.map(e => Math.ceil((new Date(e.date).getTime() - new Date().getTime()) / 86_400_000))
+		.filter(d => d >= 0)
+
+	const tdy = diffs.filter(d => d === 0).length
+	const tmr = diffs.filter(d => d === 1).length
+	const wk = diffs.filter(d => d < 7).length
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -29,12 +42,9 @@ const Activities = async () => {
 				<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
 					<InfoBadge Icon={Book}
 						content={`${activities.docs.length} remaining activit${activities.docs.length > 1 && "ies" || "y"}`} />
-					<InfoBadge
-						Icon={CalendarClock}
-						content={`${
-							activities.docs.filter(a => (new Date(a.date).getTime() - new Date().getTime()) / 86400000 < 7).length
-						} this week`}
-					/>
+					<InfoBadge Icon={CalendarClock} content={`${tdy} today`} />
+					<InfoBadge Icon={CalendarClock} content={`${tmr} tomorrow`} />
+					<InfoBadge Icon={CalendarClock} content={`${wk} this week`} />
 				</div>
 			</div>
 			<div className="flex flex-col gap-4">
@@ -43,13 +53,12 @@ const Activities = async () => {
 						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-20 h-4" />} />
 					</Loading>
 				}>
-					{activities.docs.map(a => {
-						return (
-							<ListItem value={a.id} key={a.id} title={a.name} content={a.info} participants={a.participants}>
-								<InfoBadge Icon={CalendarClock} content={new Date(a.date).toLocaleDateString("vi-VN")} />
-							</ListItem>
-						)
-					})}
+					{activities.docs.length
+							&& activities.docs.map(a => (
+								<ListItem value={a.id} key={a.id} title={a.name} content={a.info} participants={a.participants}>
+									<InfoBadge Icon={CalendarClock} content={new Date(a.date).toLocaleDateString("vi-VN")} />
+								</ListItem>
+							)) || "No activities left!"}
 				</Suspense>
 			</div>
 		</div>

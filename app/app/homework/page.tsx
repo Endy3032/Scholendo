@@ -18,10 +18,18 @@ const Homework = async () => {
 		sort: "deadline",
 		where: {
 			deadline: {
-				greater_than_equal: new Date().toISOString(),
+				greater_than_equal: new Date(new Date().setUTCHours(0, 0, 0, 0)).toISOString(),
 			},
 		},
 	})
+
+	const diffs = homework.docs
+		.map(e => Math.ceil((new Date(e.deadline).getTime() - new Date().getTime()) / 86_400_000))
+		.filter(d => d >= 0)
+
+	const tdy = diffs.filter(d => d === 0).length
+	const tmr = diffs.filter(d => d === 1).length
+	const wk = diffs.filter(d => d < 7).length
 
 	return (
 		<div className="flex flex-col gap-4">
@@ -33,18 +41,9 @@ const Homework = async () => {
 				</span>
 				<div className="flex flex-wrap gap-3 text-muted-foreground mb-1">
 					<InfoBadge Icon={Book} content={`${homework.docs.length} remaining assignment${homework.docs.length > 1 && "s"}`} />
-					<InfoBadge
-						Icon={CalendarClock}
-						content={`${
-							homework.docs.filter(hw => new Date(hw.deadline).getTime() - new Date().getTime() / 86400000 < 1).length
-						} due today`}
-					/>
-					<InfoBadge
-						Icon={CalendarClock}
-						content={`${
-							homework.docs.filter(hw => (new Date(hw.deadline).getTime() - new Date().getTime()) / 86400000 < 7).length
-						} due this week`}
-					/>
+					<InfoBadge Icon={CalendarClock} content={`${tdy} due today`} />
+					<InfoBadge Icon={CalendarClock} content={`${tmr} due tomorrow`} />
+					<InfoBadge Icon={CalendarClock} content={`${wk} due this week`} />
 				</div>
 			</div>
 			<div className="flex flex-col gap-3">
@@ -55,18 +54,19 @@ const Homework = async () => {
 						<InfoBadge Icon={CalendarClock} content={<Skeleton className="w-24 h-4" />} />
 					</Loading>
 				}>
-					{homework.docs.map(hw => {
-						const hwDate = new Date(hw.deadline), date = new Date()
-						const diff = Math.ceil((hwDate.getTime() - date.getTime()) / (3600 * 24 * 1000))
+					{homework.docs.length
+							&& homework.docs.map(hw => {
+								const hwDate = new Date(hw.deadline)
+								const diff = Math.ceil((hwDate.getTime() - new Date().getTime()) / 86_400_000)
 
-						return (
-							<ListItem key={hw.id} value={hw.id} diff={diff} title={hw.name} content={hw.description} notes={hw.notes}>
-								<InfoBadge Icon={Book} content={typeof hw.subject === "string" ? hw.subject : hw.subject?.name} />
-								<InfoBadge Icon={BookCheck} content={hw.type} />
-								<InfoBadge Icon={CalendarClock} content={hwDate.toLocaleDateString("vi-VN")} />
-							</ListItem>
-						)
-					})}
+								return (
+									<ListItem key={hw.id} value={hw.id} diff={diff} title={hw.name} content={hw.description} notes={hw.notes}>
+										<InfoBadge Icon={Book} content={typeof hw.subject === "string" ? hw.subject : hw.subject?.name} />
+										<InfoBadge Icon={BookCheck} content={hw.type} />
+										<InfoBadge Icon={CalendarClock} content={hwDate.toLocaleDateString("vi-VN")} />
+									</ListItem>
+								)
+							}) || "No homework left!"}
 				</Suspense>
 			</div>
 		</div>
