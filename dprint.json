@@ -19,7 +19,7 @@
 	"excludes": [
 		".next/**/*",
 		"node_modules/**/*",
-		"payload-types.ts"
+		"src/payload/payload-types.ts"
 	],
 	"plugins": [
 		"https://plugins.dprint.dev/typescript-0.86.2.wasm",
