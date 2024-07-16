@@ -1,5 +1,4 @@
-// storage-adapter-import-placeholder
-import { postgresAdapter } from "@payloadcms/db-postgres"
+import { mongooseAdapter } from "@payloadcms/db-mongodb"
 import { lexicalEditor } from "@payloadcms/richtext-lexical"
 import path from "path"
 import { buildConfig } from "payload"
@@ -13,26 +12,23 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-	admin: {
-		user: Users.slug,
-	},
 	collections: [Users, Media],
 	editor: lexicalEditor(),
 	secret: process.env.PAYLOAD_SECRET || "",
+	sharp,
 	typescript: {
 		outputFile: path.resolve(dirname, "payload-types.ts"),
 	},
-	db: postgresAdapter({
-		pool: {
-			connectionString: process.env.DATABASE_URI,
-			ssl: {
-				rejectUnauthorized: true,
-				ca: process.env.DATABASE_CERT,
-			},
+	admin: {
+		user: Users.slug,
+		avatar: "default",
+		dateFormat: "dd/MM/yyyy",
+	},
+	db: mongooseAdapter({
+		url: process.env.DATABASE_URI || "",
+		connectOptions: {
+			cert: process.env.DATABASE_CERT,
+			key: process.env.DATABASE_KEY,
 		},
 	}),
-	sharp,
-	plugins: [
-		// storage-adapter-placeholder
-	],
 })
