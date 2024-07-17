@@ -7432,6 +7432,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"nodemailer@npm:^6.9.14":
+  version: 6.9.14
+  resolution: "nodemailer@npm:6.9.14"
+  checksum: 10c0/2542986849bc6ec2bf12fb7b72226da0ce9c6a0946216dea020d9eedee3ac1a4eb2413f59772a3ddd4bb9188d5ce859167a030c065719473f71319e052a319dc
+  languageName: node
+  linkType: hard
+
 "nopt@npm:^7.0.0, nopt@npm:^7.2.0":
   version: 7.2.1
   resolution: "nopt@npm:7.2.1"
@@ -8740,6 +8747,7 @@ __metadata:
   resolution: "scholendo@workspace:."
   dependencies:
     "@payloadcms/db-mongodb": "npm:3.0.0-beta.65"
+    "@payloadcms/email-nodemailer": "npm:3.0.0-beta.65"
     "@payloadcms/next": "npm:3.0.0-beta.65"
     "@payloadcms/plugin-cloud": "npm:3.0.0-beta.65"
     "@payloadcms/richtext-lexical": "npm:3.0.0-beta.65"
@@ -8761,6 +8769,7 @@ __metadata:
     graphql: "npm:^16.8.1"
     lucide-react: "npm:^0.408.0"
     next: "npm:15.0.0-rc.0"
+    nodemailer: "npm:^6.9.14"
     payload: "npm:3.0.0-beta.65"
     react: "npm:19.0.0-rc-f994737d14-20240522"
     react-dom: "npm:19.0.0-rc-f994737d14-20240522"

@@ -1,19 +1,25 @@
 import { mongooseAdapter } from "@payloadcms/db-mongodb"
-import { lexicalEditor } from "@payloadcms/richtext-lexical"
+import { nodemailerAdapter } from "@payloadcms/email-nodemailer"
+import { HTMLConverterFeature, lexicalEditor } from "@payloadcms/richtext-lexical"
+import nodemailer from "nodemailer"
 import path from "path"
 import { buildConfig } from "payload"
 import sharp from "sharp"
 import { fileURLToPath } from "url"
 
+import { Assignments } from "./collections/Assignments"
 import { Media } from "./collections/Media"
+import { Subjects } from "./collections/Subjects"
+import { Tags } from "./collections/Tags"
+import { Teachers } from "./collections/Teachers"
 import { Users } from "./collections/Users"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-	collections: [Users, Media],
-	editor: lexicalEditor(),
+	collections: [Users, Teachers, Subjects, Assignments, Tags, Media],
+	editor: lexicalEditor({ features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})] }),
 	secret: process.env.PAYLOAD_SECRET || "",
 	sharp,
 	typescript: {
@@ -25,10 +31,22 @@ export default buildConfig({
 		dateFormat: "dd/MM/yyyy",
 	},
 	db: mongooseAdapter({
-		url: process.env.DATABASE_URI || "",
+		url: process.env.DATABASE_URI ?? "",
 		connectOptions: {
 			cert: process.env.DATABASE_CERT,
 			key: process.env.DATABASE_KEY,
 		},
+	}),
+	email: nodemailerAdapter({
+		defaultFromAddress: process.env.SMTP_FROM_ADDRESS ?? "",
+		defaultFromName: process.env.SMTP_FROM_NAME ?? "",
+		transport: nodemailer.createTransport({
+			host: process.env.SMTP_HOST ?? "",
+			port: parseInt(process.env.SMTP_PORT ?? "587"),
+			auth: {
+				user: process.env.SMTP_USER ?? "",
+				pass: process.env.SMTP_PASS ?? "",
+			},
+		}),
 	}),
 })
