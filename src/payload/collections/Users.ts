@@ -24,9 +24,7 @@ export const adminsOrSameUser: Access = ({ req: { user }, id }) => checkRoles(us
 
 export const Users: CollectionConfig = {
 	slug: "users",
-	admin: {
-		useAsTitle: "email",
-	},
+	admin: { useAsTitle: "name" },
 	access: {
 		read: anyone,
 		create: anyone,

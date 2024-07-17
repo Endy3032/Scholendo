@@ -8,6 +8,7 @@ import sharp from "sharp"
 import { fileURLToPath } from "url"
 
 import { Assignments } from "./collections/Assignments"
+import { Exams } from "./collections/Exams"
 import { Media } from "./collections/Media"
 import { Subjects } from "./collections/Subjects"
 import { Tags } from "./collections/Tags"
@@ -18,7 +19,7 @@ const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-	collections: [Users, Teachers, Subjects, Assignments, Tags, Media],
+	collections: [Users, Teachers, Subjects, Assignments, Exams, Tags, Media],
 	editor: lexicalEditor({ features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})] }),
 	secret: process.env.PAYLOAD_SECRET || "",
 	sharp,
