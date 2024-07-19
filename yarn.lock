@@ -7295,6 +7295,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"next-themes@npm:^0.3.0":
+  version: 0.3.0
+  resolution: "next-themes@npm:0.3.0"
+  peerDependencies:
+    react: ^16.8 || ^17 || ^18
+    react-dom: ^16.8 || ^17 || ^18
+  checksum: 10c0/72bd670ad6b9f547dc18cece340dfd1ac41e3e7b37eb321d4767db90bfa2c239f937011cd0efe35ca0081f1ea260051bc0868808ef39b0fbff2ddefd7146cec6
+  languageName: node
+  linkType: hard
+
 "next-tick@npm:^1.1.0":
   version: 1.1.0
   resolution: "next-tick@npm:1.1.0"
@@ -8769,11 +8779,13 @@ __metadata:
     graphql: "npm:^16.8.1"
     lucide-react: "npm:^0.408.0"
     next: "npm:15.0.0-rc.0"
+    next-themes: "npm:^0.3.0"
     nodemailer: "npm:^6.9.14"
     payload: "npm:3.0.0-beta.65"
     react: "npm:19.0.0-rc-f994737d14-20240522"
     react-dom: "npm:19.0.0-rc-f994737d14-20240522"
     sharp: "npm:0.32.6"
+    sonner: "npm:^1.5.0"
     tailwind-merge: "npm:^2.4.0"
     tailwindcss: "npm:^3.4.5"
     tailwindcss-animate: "npm:^1.0.7"

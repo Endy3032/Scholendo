@@ -5,13 +5,13 @@
 	"license": "MIT",
 	"type": "module",
 	"scripts": {
-		"build": "cross-env NODE_OPTIONS=--no-deprecation next build",
-		"dev": "cross-env NODE_OPTIONS=--no-deprecation next dev",
-		"devsafe": "rm -rf .next && cross-env NODE_OPTIONS=--no-deprecation next dev",
+		"build": "cross-env next build",
+		"dev": "cross-env next dev",
+		"devsafe": "rm -rf .next && cross-env next dev",
 		"generate:types": "payload generate:types",
-		"lint": "cross-env NODE_OPTIONS=--no-deprecation next lint",
-		"payload": "cross-env NODE_OPTIONS=--no-deprecation PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload",
-		"start": "cross-env NODE_OPTIONS=--no-deprecation next start"
+		"lint": "cross-env next lint",
+		"payload": "cross-env PAYLOAD_CONFIG_PATH=src/payload/payload.config.ts payload",
+		"start": "cross-env next start"
 	},
 	"dependencies": {
 		"@payloadcms/db-mongodb": "3.0.0-beta.65",
@@ -26,11 +26,13 @@
 		"graphql": "^16.8.1",
 		"lucide-react": "^0.408.0",
 		"next": "15.0.0-rc.0",
+		"next-themes": "^0.3.0",
 		"nodemailer": "^6.9.14",
 		"payload": "3.0.0-beta.65",
 		"react": "19.0.0-rc-f994737d14-20240522",
 		"react-dom": "19.0.0-rc-f994737d14-20240522",
 		"sharp": "0.32.6",
+		"sonner": "^1.5.0",
 		"tailwind-merge": "^2.4.0",
 		"tailwindcss": "^3.4.5",
 		"tailwindcss-animate": "^1.0.7"

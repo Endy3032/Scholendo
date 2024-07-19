@@ -1,13 +1,29 @@
 import type { Config } from "tailwindcss"
+import twAnimate from "tailwindcss-animate"
+import { black, blue, current, emerald, inherit, orange, red, teal, transparent, white, yellow, zinc } from "tailwindcss/colors"
+import plugin from "tailwindcss/plugin"
 
 const config = {
-	darkMode: ["class"],
 	content: [
 		"./src/app/**/*.{ts,tsx}",
 		"./src/components/**/*.{ts,tsx}",
 	],
 	prefix: "",
 	theme: {
+		colors: {
+			inherit,
+			current,
+			transparent,
+			black,
+			white,
+			gray: zinc,
+			red,
+			orange,
+			yellow,
+			green: emerald,
+			teal,
+			blue,
+		},
 		container: {
 			center: true,
 			padding: "2rem",
@@ -16,46 +32,6 @@ const config = {
 			},
 		},
 		extend: {
-			colors: {
-				border: "hsl(var(--border))",
-				input: "hsl(var(--input))",
-				ring: "hsl(var(--ring))",
-				background: "hsl(var(--background))",
-				foreground: "hsl(var(--foreground))",
-				primary: {
-					DEFAULT: "hsl(var(--primary))",
-					foreground: "hsl(var(--primary-foreground))",
-				},
-				secondary: {
-					DEFAULT: "hsl(var(--secondary))",
-					foreground: "hsl(var(--secondary-foreground))",
-				},
-				destructive: {
-					DEFAULT: "hsl(var(--destructive))",
-					foreground: "hsl(var(--destructive-foreground))",
-				},
-				muted: {
-					DEFAULT: "hsl(var(--muted))",
-					foreground: "hsl(var(--muted-foreground))",
-				},
-				accent: {
-					DEFAULT: "hsl(var(--accent))",
-					foreground: "hsl(var(--accent-foreground))",
-				},
-				popover: {
-					DEFAULT: "hsl(var(--popover))",
-					foreground: "hsl(var(--popover-foreground))",
-				},
-				card: {
-					DEFAULT: "hsl(var(--card))",
-					foreground: "hsl(var(--card-foreground))",
-				},
-			},
-			borderRadius: {
-				lg: "var(--radius)",
-				md: "calc(var(--radius) - 2px)",
-				sm: "calc(var(--radius) - 4px)",
-			},
 			keyframes: {
 				"accordion-down": {
 					from: { height: "0" },
@@ -72,7 +48,16 @@ const config = {
 			},
 		},
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [
+		twAnimate,
+		plugin(function({ addBase, theme }) {
+			addBase({
+				h1: { fontSize: theme("fontSize.2xl"), fontWeight: theme("fontWeight.bold") },
+				h2: { fontSize: theme("fontSize.xl"), fontWeight: theme("fontWeight.semibold") },
+				h3: { fontSize: theme("fontSize.lg"), fontWeight: theme("fontWeight.medium") },
+			})
+		}),
+	],
 } satisfies Config
 
 export default config
