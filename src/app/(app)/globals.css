@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@supports (scrollbar-color: auto) {
+  html {
+    scrollbar-color: theme(colors.gray.400) transparent;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 14px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: theme(colors.gray.400);
+	border: 3.5px solid transparent;
+  background-clip: content-box;
+}
