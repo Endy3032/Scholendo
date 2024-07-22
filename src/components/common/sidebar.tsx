@@ -59,7 +59,7 @@ export const Sidebar = () => (
 				<Tab text="Dashboard" Icon={Logo} href="/" />
 				<hr className="mx-2 hidden border-gray-500 sm:block" />
 				<Tab text="Assignments" Icon={BookMarked} href="/assignments" />
-				<Tab text="Examinations" Icon={NotebookPen} href="/exams" />
+				<Tab text="Examinations" Icon={NotebookPen} href="/examinations" />
 				<Tab text="Timetable" Icon={CalendarDays} href="/timetable" />
 			</div>
 		</div>
