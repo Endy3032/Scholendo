@@ -26,6 +26,7 @@ export const Subjects: CollectionConfig = {
 		{
 			name: "isElective",
 			type: "checkbox",
+			defaultValue: false,
 		},
 	],
 }
