@@ -2,8 +2,8 @@
 	--height: 2rem;
 	--animation-start: 0.5rem;
 	--animation-end: 3rem;
-	--gradient-light: transparent, theme(colors.gray.100)BB, theme(colors.gray.100);
-	--gradient-dark: transparent, theme(colors.gray.900)BB, theme(colors.gray.900);
+	--gradient-light: transparent, theme(colors.light)BB, theme(colors.light);
+	--gradient-dark: transparent, theme(colors.dark)BB, theme(colors.dark);
 	scroll-timeline: --scroll-timeline y;
 
 	@media screen and (min-width: theme(screens.sm)) {

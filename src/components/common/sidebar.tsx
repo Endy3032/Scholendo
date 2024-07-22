@@ -24,27 +24,28 @@ const Tab = ({ Icon, href, text }: TabProps) => {
 			<HoverCardTrigger asChild>
 				<div className="flex-1">
 					<Link href={href} title={text} className={cn(
-						"group flex h-full flex-col items-center gap-1 p-2 transition-all",
-						"outline-none focus-visible:ring-1 focus-visible:ring-gray-500",
-						"hover:bg-gray-300 hover:text-gray-900 dark:hover:bg-gray-700 dark:hover:text-gray-100",
-						"focus:bg-gray-300 focus:text-gray-900 dark:focus:bg-gray-700 dark:focus:text-gray-100",
-						"active:bg-gray-400 active:text-gray-900 dark:active:bg-gray-600 dark:active:text-gray-100",
-						"hover:rounded-md focus-visible:rounded-md active:rounded-md",
+						"group flex h-full flex-col items-center gap-1 rounded-md p-2 transition-all",
+						"outline-none focus-visible:ring-1 focus-visible:ring-neutral",
+						"hover:bg-sidebar-light/80 hover:text-dark dark:hover:bg-sidebar-dark/80 dark:hover:text-light",
+						"focus:bg-sidebar-light/80 focus:text-dark dark:focus:bg-sidebar-dark/80 dark:focus:text-light",
+						"active:bg-sidebar-light active:text-dark dark:active:bg-sidebar-dark dark:active:text-light",
+						"hover:rounded-md focus:rounded-md active:rounded-md",
 						active
-							? "rounded-md bg-gray-400/75 dark:bg-gray-600/75"
-							: "rounded-md text-gray-500 sm:rounded-2xl sm:bg-gray-300/50 sm:dark:bg-gray-700/50",
+							? "bg-sidebar-light dark:bg-sidebar-dark"
+							: "text-neutral sm:rounded-2xl sm:bg-sidebar-light/50 sm:dark:bg-sidebar-dark/50",
 					)}>
-						<Icon className="aspect-square h-6 w-auto py-0.5 sm:h-10" strokeWidth={1.5} />
+						<Icon
+							className="aspect-square h-6 w-auto py-0.5 shadow-black/20 drop-shadow-sidebarIcon sm:h-10"
+							strokeWidth={1.5}
+						/>
 						<span className="block select-none text-center text-xs sm:hidden">
 							{text}
 						</span>
 					</Link>
 				</div>
 			</HoverCardTrigger>
-			<HoverCardContent
-				side="right"
-				sideOffset={16}
-				className="hidden border border-gray-600/20 bg-gray-100/75 text-sm shadow-lg backdrop-blur-3xl backdrop-saturate-200 sm:block dark:border-gray-400/20 dark:bg-gray-700/75"
+			<HoverCardContent side="right" sideOffset={16}
+				className="pointer-events-none hidden border border-sidebar-dark/20 sm:block dark:border-sidebar-light/20"
 			>
 				{text}
 			</HoverCardContent>
@@ -57,7 +58,7 @@ export const Sidebar = () => (
 		<div className={cn("h-full sm:overflow-y-auto sm:p-[1px] sm:py-2", styles.sidebar)}>
 			<div className="flex flex-row gap-1 sm:flex-col sm:gap-2">
 				<Tab text="Dashboard" Icon={Logo} href="/" />
-				<hr className="mx-2 hidden border-gray-500 sm:block" />
+				<hr className="mx-2 hidden border-neutral sm:block" />
 				<Tab text="Assignments" Icon={BookMarked} href="/assignments" />
 				<Tab text="Examinations" Icon={NotebookPen} href="/examinations" />
 				<Tab text="Timetable" Icon={CalendarDays} href="/timetable" />
