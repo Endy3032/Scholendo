@@ -2,8 +2,8 @@
 	--height: 2rem;
 	--animation-start: 0.5rem;
 	--animation-end: 3rem;
-	--gradient-light: transparent, theme(colors.light)BB, theme(colors.light);
-	--gradient-dark: transparent, theme(colors.dark)BB, theme(colors.dark);
+	--gradient-light: transparent, theme(colors.bgLight)BB, theme(colors.bgLight);
+	--gradient-dark: transparent, theme(colors.bgDark)BB, theme(colors.bgDark);
 	scroll-timeline: --scroll-timeline y;
 
 	@media screen and (min-width: theme(screens.sm)) {
@@ -14,6 +14,7 @@
 			width: 100%;
 			height: var(--height);
 			opacity: 0;
+			z-index: 10;
 			pointer-events: none;
 			animation-name: fadeIn;
 			animation-timeline: --scroll-timeline;

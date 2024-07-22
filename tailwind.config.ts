@@ -1,7 +1,6 @@
 import type { Config } from "tailwindcss"
 import twAnimate from "tailwindcss-animate"
-import { black, blue, current, emerald, inherit, orange, red, teal, transparent, white, yellow,
-	zinc as gray } from "tailwindcss/colors"
+import { blue, current, emerald, inherit, orange, red, teal, transparent, yellow, zinc as gray } from "tailwindcss/colors"
 import plugin from "tailwindcss/plugin"
 
 const config = {
@@ -15,8 +14,8 @@ const config = {
 			inherit,
 			current,
 			transparent,
-			black,
-			white,
+			black: gray[950],
+			white: gray[50],
 			gray,
 			red,
 			orange,
@@ -35,17 +34,21 @@ const config = {
 		extend: {
 			colors: {
 				light: gray[100],
+				fgLight: gray[200],
+				bgLight: gray[300],
 				neutral: gray[500],
+				fgDark: gray[800],
+				bgDark: gray[900],
 				dark: gray[900],
 				sidebar: {
-					light: gray[400],
+					light: gray[100],
 					dark: gray[700],
 				},
 			},
 			dropShadow: {
 				sidebarIcon: [
-					"2px 2px 5px rgb(0, 0, 0, 0.2)",
-					"-2px -2px 5px rgb(0, 0, 0, 0.2)",
+					"1px 1px 1px rgb(0, 0, 0, 0.15)",
+					"-1px -1px 1px rgb(0, 0, 0, 0.15)",
 				],
 			},
 			keyframes: {

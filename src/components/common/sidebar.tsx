@@ -24,10 +24,10 @@ const Tab = ({ Icon, href, text }: TabProps) => {
 			<HoverCardTrigger asChild>
 				<div className="flex-1">
 					<Link href={href} title={text} className={cn(
-						"group flex h-full flex-col items-center gap-1 rounded-md p-2 transition-all",
+						"group flex h-full flex-col items-center gap-1 rounded-md p-2 shadow-sidebar-dark/20 transition-all",
 						"outline-none focus-visible:ring-1 focus-visible:ring-neutral",
-						"hover:bg-sidebar-light/80 hover:text-dark dark:hover:bg-sidebar-dark/80 dark:hover:text-light",
-						"focus:bg-sidebar-light/80 focus:text-dark dark:focus:bg-sidebar-dark/80 dark:focus:text-light",
+						"hover:bg-sidebar-light/70 hover:text-dark dark:hover:bg-sidebar-dark/80 dark:hover:text-light",
+						"focus:bg-sidebar-light/70 focus:text-dark dark:focus:bg-sidebar-dark/80 dark:focus:text-light",
 						"active:bg-sidebar-light active:text-dark dark:active:bg-sidebar-dark dark:active:text-light",
 						"hover:rounded-md focus:rounded-md active:rounded-md",
 						active
@@ -54,7 +54,11 @@ const Tab = ({ Icon, href, text }: TabProps) => {
 }
 
 export const Sidebar = () => (
-	<nav className="relative order-last max-h-dvh w-full sm:order-first sm:w-auto">
+	<nav className={cn(
+		"sticky bottom-0 left-0 order-last max-h-dvh w-full rounded-t-lg p-1 sm:order-first sm:w-auto sm:p-0",
+		"backdrop-blur-md backdrop-saturate-200 sm:backdrop-filter-none",
+		"bg-fgLight/75 transition-colors sm:bg-transparent dark:bg-fgDark/75 sm:dark:bg-transparent",
+	)}>
 		<div className={cn("h-full sm:overflow-y-auto sm:p-[1px] sm:py-2", styles.sidebar)}>
 			<div className="flex flex-row gap-1 sm:flex-col sm:gap-2">
 				<Tab text="Dashboard" Icon={Logo} href="/" />
