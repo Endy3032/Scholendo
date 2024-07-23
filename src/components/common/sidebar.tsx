@@ -7,7 +7,7 @@ import { RouteType } from "next/dist/lib/load-custom-routes"
 import Link, { LinkProps } from "next/link"
 import { usePathname } from "next/navigation"
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "../ui/hover-card"
-import styles from "./sidebar.module.css"
+import styles from "./scrollFader.module.css"
 
 type TabProps = {
 	Icon: LucideIcon
@@ -55,11 +55,11 @@ const Tab = ({ Icon, href, text }: TabProps) => {
 
 export const Sidebar = () => (
 	<nav className={cn(
-		"sticky bottom-0 left-0 order-last max-h-dvh w-full rounded-t-lg p-1 sm:order-first sm:w-auto sm:p-0",
+		"sticky bottom-0 left-0 z-20 order-last max-h-dvh w-full rounded-t-lg p-1 sm:order-first sm:w-auto sm:p-0",
 		"backdrop-blur-md backdrop-saturate-200 sm:backdrop-filter-none",
 		"bg-fgLight/75 transition-colors sm:bg-transparent dark:bg-fgDark/75 sm:dark:bg-transparent",
 	)}>
-		<div className={cn("h-full sm:overflow-y-auto sm:p-[1px] sm:py-2", styles.sidebar)}>
+		<div className={cn("h-full sm:overflow-y-auto sm:p-[1px] sm:py-2", styles.scrollFader, styles.sidebar)}>
 			<div className="flex flex-row gap-1 sm:flex-col sm:gap-2">
 				<Tab text="Dashboard" Icon={Logo} href="/" />
 				<hr className="mx-2 hidden border-neutral sm:block" />
