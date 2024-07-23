@@ -55,7 +55,7 @@ const Tab = ({ Icon, href, text }: TabProps) => {
 
 export const Sidebar = () => (
 	<nav className={cn(
-		"sticky bottom-0 left-0 z-20 order-last max-h-dvh w-full rounded-t-lg p-1 sm:order-first sm:w-auto sm:p-0",
+		"sticky bottom-0 left-0 z-30 order-last max-h-dvh w-full rounded-t-lg p-1 sm:order-first sm:w-auto sm:p-0",
 		"backdrop-blur-md backdrop-saturate-200 sm:backdrop-filter-none",
 		"bg-fgLight/75 transition-colors sm:bg-transparent dark:bg-fgDark/75 sm:dark:bg-transparent",
 	)}>
