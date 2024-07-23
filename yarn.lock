@@ -3723,7 +3723,26 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@radix-ui/react-slot@npm:1.1.0":
+"@radix-ui/react-separator@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "@radix-ui/react-separator@npm:1.1.0"
+  dependencies:
+    "@radix-ui/react-primitive": "npm:2.0.0"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/0ca9e25db27b6b001f3c0c50b2df9d6cf070b949f183043e263115d694a25b7268fecd670572469a512e556deca25ebb08b3aec4a870f0309eed728eef19ab8a
+  languageName: node
+  linkType: hard
+
+"@radix-ui/react-slot@npm:1.1.0, @radix-ui/react-slot@npm:^1.1.0":
   version: 1.1.0
   resolution: "@radix-ui/react-slot@npm:1.1.0"
   dependencies:
@@ -6390,7 +6409,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"date-fns@npm:^3.3.1":
+"date-fns@npm:^3.3.1, date-fns@npm:^3.6.0":
   version: 3.6.0
   resolution: "date-fns@npm:3.6.0"
   checksum: 10c0/0b5fb981590ef2f8e5a3ba6cd6d77faece0ea7f7158948f2eaae7bbb7c80a8f63ae30b01236c2923cf89bb3719c33aeb150c715ea4fe4e86e37dcf06bed42fb6
@@ -10345,6 +10364,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"react-day-picker@npm:^8.10.1":
+  version: 8.10.1
+  resolution: "react-day-picker@npm:8.10.1"
+  peerDependencies:
+    date-fns: ^2.28.0 || ^3.0.0
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10c0/a0ff28c4b61b3882e6a825b19e5679e2fdf3256cf1be8eb0a0c028949815c1ae5a6561474c2c19d231c010c8e0e0b654d3a322610881e0655abca05a2e03d9df
+  languageName: node
+  linkType: hard
+
 "react-diff-viewer-continued@npm:3.2.6":
   version: 3.2.6
   resolution: "react-diff-viewer-continued@npm:3.2.6"
@@ -10835,6 +10864,8 @@ __metadata:
     "@payloadcms/plugin-cloud": "npm:3.0.0-beta.65"
     "@payloadcms/richtext-lexical": "npm:3.0.0-beta.65"
     "@radix-ui/react-hover-card": "npm:^1.1.1"
+    "@radix-ui/react-separator": "npm:^1.1.0"
+    "@radix-ui/react-slot": "npm:^1.1.0"
     "@svgr/webpack": "npm:^8.1.0"
     "@swc/core": "npm:^1.6.13"
     "@types/node": "npm:^20.12.12"
@@ -10848,6 +10879,7 @@ __metadata:
     class-variance-authority: "npm:^0.7.0"
     clsx: "npm:^2.1.1"
     cross-env: "npm:^7.0.3"
+    date-fns: "npm:^3.6.0"
     dotenv: "npm:^16.4.5"
     eslint: "npm:^8"
     eslint-config-next: "npm:15.0.0-rc.0"
@@ -10858,6 +10890,7 @@ __metadata:
     nodemailer: "npm:^6.9.14"
     payload: "npm:3.0.0-beta.65"
     react: "npm:19.0.0-rc-f994737d14-20240522"
+    react-day-picker: "npm:^8.10.1"
     react-dom: "npm:19.0.0-rc-f994737d14-20240522"
     sharp: "npm:0.32.6"
     sonner: "npm:^1.5.0"
