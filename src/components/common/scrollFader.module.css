@@ -1,36 +1,38 @@
-.scrollFader {
-	--height: 2rem;
-	--animation-start: 0rem;
-	--animation-end: 1rem;
-	--gradient-light: transparent, theme(colors.fgLight / .75), theme(colors.fgLight);
-	--gradient-dark: transparent, theme(colors.fgDark / .75), theme(colors.fgDark);
-	scroll-timeline: --scroll-timeline y;
+@supports (scroll-timeline: --scroll-timeline) {
+	.scrollFader {
+		--height: 2rem;
+		--animation-start: 0rem;
+		--animation-end: 1rem;
+		--gradient-light: transparent, theme(colors.fgLight / .75), theme(colors.fgLight);
+		--gradient-dark: transparent, theme(colors.fgDark / .75), theme(colors.fgDark);
+		scroll-timeline: --scroll-timeline y;
 
-	@media screen and (min-width: theme(screens.sm)) {
-		&::before, &::after {
-			@apply content-[''] absolute left-0 w-full opacity-0 pointer-events-none z-20;
-			height: var(--height);
-			animation-name: fadeIn;
-			animation-timeline: --scroll-timeline;
-			animation-fill-mode: both;
-		}
+		@media screen and (min-width: theme(screens.sm)) {
+			&::before, &::after {
+				@apply content-[''] absolute left-0 w-full opacity-0 pointer-events-none z-20;
+				height: var(--height);
+				animation-name: fadeIn;
+				animation-timeline: --scroll-timeline;
+				animation-fill-mode: both;
+			}
 
-		&::before {
-			top: 0px;
-			animation-range: var(--animation-start) var(--animation-end);
-			background: linear-gradient(to top, var(--gradient-light))
-		}
+			&::before {
+				top: 0px;
+				animation-range: var(--animation-start) var(--animation-end);
+				background: linear-gradient(to top, var(--gradient-light))
+			}
 
-		&::after {
-			bottom: 0px;
-			animation-direction: reverse;
-			animation-range: calc(100% - var(--animation-end)) calc(100% - var(--animation-start));
-			background: linear-gradient(to bottom, var(--gradient-light));
-		}
+			&::after {
+				bottom: 0px;
+				animation-direction: reverse;
+				animation-range: calc(100% - var(--animation-end)) calc(100% - var(--animation-start));
+				background: linear-gradient(to bottom, var(--gradient-light));
+			}
 
-		@media (prefers-color-scheme: dark) {
-			&::before { background: linear-gradient(to top, var(--gradient-dark)) }
-			&::after { background: linear-gradient(to bottom, var(--gradient-dark)) }
+			@media (prefers-color-scheme: dark) {
+				&::before { background: linear-gradient(to top, var(--gradient-dark)) }
+				&::after { background: linear-gradient(to bottom, var(--gradient-dark)) }
+			}
 		}
 	}
 }
