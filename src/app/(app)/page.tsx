@@ -1,10 +1,4 @@
-import config from "@payload-config"
-import { getPayload } from "payload"
-
 export default async function Page() {
-	// const payload = await getPayload({ config })
-	// const assignments = await payload.find({ collection: "assignments" })
-
 	return (
 		<div>
 			<h1>My App</h1>
