@@ -7,6 +7,8 @@ import { getPayload } from "payload"
 import { Suspense } from "react"
 import { Assignments } from "./client"
 
+export const dynamic = "force-dynamic"
+
 export default async function Page() {
 	const payload = await getPayload({ config })
 	const assignments = await payload.find({ collection: "assignments", limit: 100 })
