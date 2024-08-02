@@ -59,7 +59,7 @@ export const Sidebar = () => (
 		"backdrop-blur-md backdrop-saturate-200 sm:backdrop-filter-none",
 		"bg-fgLight/75 transition-colors sm:bg-transparent dark:bg-fgDark/75 sm:dark:bg-transparent",
 	)}>
-		<div className={cn("h-full sm:overflow-y-auto sm:p-[1px] sm:py-2", styles.scrollFader, styles.sidebar)}>
+		<div className={cn("h-full sm:overflow-y-auto sm:p-px sm:py-2", styles.scrollFader, styles.sidebar)}>
 			<div className="flex flex-row gap-1 sm:flex-col sm:gap-2">
 				<Tab text="Dashboard" Icon={Logo} href="/" />
 				<hr className="mx-2 hidden border-neutral sm:block" />
