@@ -10,6 +10,7 @@ export const useScrollspy = (elements: Element[], options?: { offset?: number; r
 
 		observerRef.current = new IntersectionObserver(
 			entries => {
+				if (window.innerWidth < 640) return
 				const intersecting = entries.reduce<string[]>((acc, cur) => cur.intersectionRatio > 0 ? [...acc, cur.target.id] : acc, [])
 				setIntersecting(prev => {
 					if (prev.length !== intersecting.length || !prev.every((v, i) => v === intersecting[i])) return intersecting
