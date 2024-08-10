@@ -1,11 +1,11 @@
+import path from "path"
+import sharp from "sharp"
+import { fileURLToPath } from "url"
+
 import { mongooseAdapter } from "@payloadcms/db-mongodb"
 import { nodemailerAdapter } from "@payloadcms/email-nodemailer"
 import { HTMLConverterFeature, lexicalEditor } from "@payloadcms/richtext-lexical"
-import nodemailer from "nodemailer"
-import path from "path"
 import { buildConfig } from "payload"
-import sharp from "sharp"
-import { fileURLToPath } from "url"
 
 import { Assignments } from "./collections/Assignments"
 import { Exams } from "./collections/Exams"
