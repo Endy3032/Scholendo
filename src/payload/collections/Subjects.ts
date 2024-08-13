@@ -15,6 +15,12 @@ export const Subjects: CollectionConfig = {
 				{
 					name: "code",
 					type: "text",
+					validate: val => {
+						if (!/^\p{RGI_Emoji}$/v.test(val) && !/[a-z]{2}/.test(val)) {
+							return "Enter one valid emoji or two uppercase characters"
+						}
+						return true
+					},
 				},
 			],
 		},
