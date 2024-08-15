@@ -1,6 +1,6 @@
 export default async function Page() {
 	return (
-		<div>
+		<div tabIndex={0}>
 			<h1>My App</h1>
 			Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis ex assumenda sapiente error! Atque, natus assumenda? Aut molestiae
 			perferendis mollitia, voluptatum blanditiis similique distinctio nam illum optio, repellat nesciunt iste ullam et quidem veniam

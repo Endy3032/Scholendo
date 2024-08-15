@@ -14,9 +14,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 				"bg-light text-black transition sm:bg-bgLight dark:bg-bgDark dark:text-white",
 			)}>
 				<Sidebar />
-				<main tabIndex={1} className={cn(
+				<main className={cn(
 					"flex-1 transition sm:flex sm:max-h-dvh sm:flex-col sm:overflow-y-auto sm:rounded-md",
-					"px-3 py-2 sm:m-0 sm:my-2 sm:px-4 sm:py-3",
+					"p-3 sm:m-0 sm:my-2 sm:p-2",
 					"bg-light sm:bg-fgLight dark:bg-bgDark sm:dark:bg-fgDark",
 					"shadow-neutral/50 outline-none ring-neutral sm:shadow-md sm:focus:ring-1 dark:shadow-fgDark/75",
 				)}>

@@ -1,86 +1,111 @@
 "use client"
 
 import styles from "@/components/common/scrollFader.module.css"
-import { Calendar } from "@/components/ui/calendar"
 import { useScrollspy } from "@/hooks/scrollspy"
 import { cn } from "@/lib/utils"
 import { Assignment } from "@payload-types"
-import { useEffect, useRef, useState } from "react"
+import { Fragment, useEffect, useMemo, useRef, useState } from "react"
+
+const getDate = (date: Date | string | number) => new Date(date).setHours(0, 0, 0, 0)
+
+type RelativeDate = "Today" | "Tomorrow" | "This Week" | "Future" | undefined
+type RelativeLabels = Record<string, { label?: RelativeDate; count?: number; date?: string } | undefined>
+
+const getRelativeLabels = (assignments: Assignment[]) => {
+	const output: RelativeLabels = {}
+
+	const today = getDate(new Date())
+	let relativeId = assignments[0].id, relativeDate: RelativeDate, deadlineRelativeDate: RelativeDate
+	let dateId = assignments[0].id, date: string | undefined, deadlineDate: string | undefined
+
+	for (const assignment of assignments) {
+		const deadline = getDate(assignment.deadline)
+		const diffDays = Math.ceil((deadline - today) / 86400_000)
+
+		const dlDay = new Date(deadline).getDay()
+		const todayDay = new Date(today).getDay()
+
+		if (diffDays < 1) deadlineRelativeDate = "Today"
+		else if (diffDays < 2) deadlineRelativeDate = "Tomorrow"
+		else if (diffDays < 7 && (dlDay > todayDay || dlDay === 0)) deadlineRelativeDate = "This Week"
+		else deadlineRelativeDate = "Future"
+
+		if (deadlineRelativeDate !== relativeDate) {
+			relativeDate = deadlineRelativeDate
+			relativeId = assignment.id
+			output[relativeId] = { label: deadlineRelativeDate, count: 1 }
+		} else output[relativeId]!.count!++
+
+		if (!["This Week", "Future"].includes(deadlineRelativeDate)) continue
+
+		deadlineDate = new Date(deadline).toLocaleString("en-US", { month: "short", day: "numeric" })
+
+		if (deadlineDate !== date) {
+			dateId = assignment.id
+			date = new Date(deadline).toLocaleString(
+				"en-US",
+				relativeDate === "This Week" ? { weekday: "short" } : { month: "short", day: "numeric" },
+			)
+
+			output[dateId] = { ...output[dateId], date }
+		}
+	}
+
+	console.log(output)
+	return output
+}
 
 export const Assignments = ({ assignments }: { assignments: Assignment[] }) => {
-	const [data] = useState<Assignment[]>(assignments)
+	const [data, _setData] = useState<Assignment[]>(assignments)
+	const relativeDateLabels = useMemo<RelativeLabels>(() => getRelativeLabels(data), [data])
+
 	const container = useRef<HTMLDivElement>(null)
 	const [elements, setElements] = useState<Element[]>([])
 	const intersectingIds = useScrollspy(elements, { offset: 24, root: container.current || undefined })
-
-	setTimeout(() => {}, 1000)
 
 	useEffect(() => setElements([...(container.current?.children || [])]), [])
 
 	return (
 		<>
-			<aside className="relative flex">
-				<div className={cn("flex flex-col gap-4 sm:overflow-y-auto", styles.scrollFader)}>
-					<Calendar mode="single" className="rounded-md border border-neutral p-2" />
-					{
-						/* <div className="flex flex-col gap-2">
-						<h3 className="ms-2">Today</h3>
-						<div className="flex flex-col gap-1">
-							<span className="rounded-md bg-gray-700 px-2 py-1">[jumplink] Maths - BTVN - 09:00</span>
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Lite - HS1 - 11:00</span>
-						</div>
-					</div>
-					<div className="flex flex-col gap-2">
-						<h3 className="ms-2">Next 3 days</h3>
-						<div className="flex flex-col gap-1">
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Placeholder - 09:00</span>
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Placeholder - 11:00</span>
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Placeholder - 13:00</span>
-						</div>
-					</div>
-					<div className="flex flex-col gap-2">
-						<h3 className="ms-2">Next 5 days</h3>
-						<div className="flex flex-col gap-1">
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Lorem ipsum - 09:00</span>
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Dolor sit - 11:00</span>
-							<span className="rounded-md bg-gray-700/40 px-2 py-1">[jumplink] Amet - 13:00</span>
-						</div>
-					</div> */
-					}
+			<aside className="relative flex min-w-52">
+				<div className={cn("flex flex-1 flex-col gap-1 p-px sm:overflow-y-auto", styles.scrollFader)}>
 					<div className="flex flex-col gap-1">
-						{data.map(assignment => (
-							<a key={assignment.id} href={`#${assignment.id}`} className={cn(
-								"rounded-md bg-gray-700/40 px-2 py-1 transition",
-								intersectingIds.includes(assignment.id) && "bg-gray-700",
-							)}>
-								{assignment.name}
-							</a>
-						))}
+						{data.map(assignment => {
+							const labels = relativeDateLabels[assignment.id]
+
+							return (
+								<Fragment key={assignment.id}>
+									{labels?.label && (
+										<div className="mx-2 mt-4 flex items-center justify-between first-of-type:mt-0">
+											<span className="font-semibold">{labels.label}</span>
+											<span className="select-none text-xs text-neutral">{labels.count}</span>
+										</div>
+									)}
+									{labels?.date && <span className="ms-2 mt-1 select-none text-xs font-medium text-neutral">{labels.date}</span>}
+									<a href={`#${assignment.id}`} className={cn(
+										"rounded-md bg-gray-700/40 px-2 py-1 outline-none transition focus-visible:ring-1 focus-visible:ring-neutral",
+										intersectingIds.includes(assignment.id) && "sm:bg-gray-700",
+									)}>
+										{assignment.name}
+									</a>
+								</Fragment>
+							)
+						})}
 					</div>
 				</div>
 			</aside>
-			<section className="relative flex flex-1">
-				<div ref={container} className={cn("flex flex-1 flex-col gap-1 sm:gap-2 sm:overflow-y-auto", styles.scrollFader)}>
+			<section className="relative flex flex-1 p-px">
+				<div tabIndex={0} ref={container} className={cn(
+					"flex flex-1 flex-col gap-1 rounded-md outline-none transition focus-visible:ring-1 focus-visible:ring-neutral sm:gap-2 sm:overflow-y-auto",
+					styles.scrollFader,
+				)}>
 					{data.map(assignment => (
 						<article key={assignment.id} id={assignment.id} className="scroll-mt-6 rounded-md bg-gray-700/25 px-2 py-1">
 							<h2>{assignment.name}</h2>
+							<div className="flex gap-2">
+								{assignment.subject.toString()}
+							</div>
 							<div dangerouslySetInnerHTML={{ __html: assignment.formattedDetails ?? "" }} />
-							<span>
-								Lorem, ipsum dolor sit amet consectetur adipisicing elit. Expedita nesciunt deserunt, excepturi blanditiis hic veniam,
-								eius in pariatur adipisci et atque amet aliquid debitis odio corrupti modi! Culpa cupiditate, dolores facere magni
-								minima natus asperiores, impedit, accusantium eligendi necessitatibus in perferendis hic. Ab fugit nemo dignissimos
-								facere cupiditate aspernatur, excepturi eveniet modi eius necessitatibus sed, minima minus sapiente! Vitae dolorum eum
-								qui perspiciatis deleniti reprehenderit obcaecati dicta alias nobis voluptas quo numquam quaerat quia soluta dolore,
-								fugit distinctio ex? Adipisci, suscipit. Iste dicta veritatis voluptates architecto id impedit iure eligendi veniam
-								tenetur. Dolor amet omnis nostrum, error consequatur quasi asperiores beatae ipsum, voluptatem accusantium, atque ex
-								facilis dolorem dolores suscipit illum alias aut et dolore placeat repellendus totam. Ratione fugiat placeat adipisci.
-								Doloremque inventore rem in unde soluta, dolor molestiae! Tenetur sed ducimus debitis maxime, perspiciatis voluptatum
-								esse porro deserunt necessitatibus nam maiores odio iure ratione modi tempore. Cumque hic blanditiis ex doloremque
-								asperiores ullam omnis esse reprehenderit, enim consequatur culpa architecto neque quibusdam non. Libero laboriosam qui
-								eveniet consequuntur aspernatur consequatur perspiciatis architecto quis adipisci voluptatum sint pariatur praesentium,
-								iusto atque autem. Dolor doloribus recusandae omnis optio exercitationem deserunt at amet autem facere perferendis
-								porro, doloremque tempora maiores. Minima.
-							</span>
 						</article>
 					))}
 				</div>
