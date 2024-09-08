@@ -15,8 +15,8 @@ const getRelativeLabels = (assignments: Assignment[]) => {
 	const output: RelativeLabels = {}
 
 	const today = getDate(new Date())
-	let relativeId = assignments[0].id, relativeDate: RelativeDate, deadlineRelativeDate: RelativeDate
-	let dateId = assignments[0].id, date: string | undefined, deadlineDate: string | undefined
+	let relativeId = assignments[0]?.id, relativeDate: RelativeDate, deadlineRelativeDate: RelativeDate
+	let dateId = assignments[0]?.id, date: string | undefined, deadlineDate: string | undefined
 
 	for (const assignment of assignments) {
 		const deadline = getDate(assignment.deadline)
@@ -94,7 +94,7 @@ export const Assignments = ({ assignments }: { assignments: Assignment[] }) => {
 					</div>
 				</div>
 			</aside>
-			<section className="relative flex flex-1 p-px">
+			<section className="relative flex flex-1 flex-col gap-2 p-px">
 				<div tabIndex={0} ref={container} className={cn(
 					"flex flex-1 flex-col gap-1 rounded-md outline-none transition focus-visible:ring-1 focus-visible:ring-neutral sm:gap-2 sm:overflow-y-auto",
 					styles.scrollFader,
@@ -103,7 +103,7 @@ export const Assignments = ({ assignments }: { assignments: Assignment[] }) => {
 						<article key={assignment.id} id={assignment.id} className="scroll-mt-6 rounded-md bg-gray-700/25 px-2 py-1">
 							<h2>{assignment.name}</h2>
 							<div className="flex gap-2">
-								{assignment.subject.toString()}
+								{typeof assignment.subject === "string" ? <span>{assignment.subject}</span> : <span>{assignment.subject.name}</span>}
 							</div>
 							<div dangerouslySetInnerHTML={{ __html: assignment.formattedDetails ?? "" }} />
 						</article>
