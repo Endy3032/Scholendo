@@ -3,7 +3,6 @@
 		--height: 2rem;
 		--animation-start: 0rem;
 		--animation-end: 1rem;
-		--gradient-light: transparent, theme(colors.fgLight / .75), theme(colors.fgLight);
 		--gradient-dark: transparent, theme(colors.fgDark / .75), theme(colors.fgDark);
 		scroll-timeline: --scroll-timeline y;
 
@@ -19,19 +18,14 @@
 			&::before {
 				top: 0px;
 				animation-range: var(--animation-start) var(--animation-end);
-				background: linear-gradient(to top, var(--gradient-light))
+				background: linear-gradient(to top, var(--gradient-dark))
 			}
 
 			&::after {
 				bottom: 0px;
 				animation-direction: reverse;
 				animation-range: calc(100% - var(--animation-end)) calc(100% - var(--animation-start));
-				background: linear-gradient(to bottom, var(--gradient-light));
-			}
-
-			@media (prefers-color-scheme: dark) {
-				&::before { background: linear-gradient(to top, var(--gradient-dark)) }
-				&::after { background: linear-gradient(to bottom, var(--gradient-dark)) }
+				background: linear-gradient(to bottom, var(--gradient-dark));
 			}
 		}
 	}
@@ -41,7 +35,6 @@
 	--height: 2rem;
 	--animation-start: 0.5rem;
 	--animation-end: 3rem;
-	--gradient-light: transparent, theme(colors.bgLight / .75), theme(colors.bgLight);
 	--gradient-dark: transparent, theme(colors.bgDark / .75), theme(colors.bgDark);
 }
 
