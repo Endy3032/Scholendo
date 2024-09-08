@@ -8,20 +8,16 @@ const font = Manrope({ subsets: ["latin"] })
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<html lang="en">
-			<body className={cn(
-				font.className,
-				"flex max-h-dvh min-h-dvh flex-col sm:flex-row sm:gap-2 sm:px-2 sm:py-0",
-				"bg-bgDark text-white transition",
-			)}>
-				<Sidebar />
-				<main className={cn(
-					"flex-1 transition sm:flex sm:max-h-dvh sm:flex-col sm:overflow-y-auto sm:rounded-md",
-					"p-3 sm:m-0 sm:my-2 sm:p-2",
-					"bg-bgDark sm:bg-fgDark",
-					"shadow-fgDark/75 outline-none ring-neutral sm:shadow-md sm:focus:ring-1",
-				)}>
-					{children}
-				</main>
+			<body className={cn(font.className, "bg-bgDark text-white transition sm:px-2")}>
+				<div className="flex max-h-dvh min-h-dvh flex-col sm:flex-row sm:gap-2">
+					<Sidebar />
+					<main className={cn(
+						"flex flex-1 flex-col p-3 shadow-black/80 transition",
+						"sm:my-2 sm:max-h-dvh sm:overflow-y-auto sm:rounded-md sm:bg-fgDark sm:p-2 sm:shadow-md",
+					)}>
+						{children}
+					</main>
+				</div>
 			</body>
 		</html>
 	)
