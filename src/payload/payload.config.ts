@@ -3,7 +3,6 @@ import sharp from "sharp"
 import { fileURLToPath } from "url"
 
 import { mongooseAdapter } from "@payloadcms/db-mongodb"
-import { nodemailerAdapter } from "@payloadcms/email-nodemailer"
 import { HTMLConverterFeature, lexicalEditor } from "@payloadcms/richtext-lexical"
 import { buildConfig } from "payload"
 
