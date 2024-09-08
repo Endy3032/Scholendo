@@ -14,6 +14,7 @@ export interface Config {
     users: User;
     teachers: Teacher;
     subjects: Subject;
+    timetable: Timetable;
     assignments: Assignment;
     exams: Exam;
     tags: Tag;
@@ -93,6 +94,85 @@ export interface Subject {
   code?: string | null;
   teacher?: (string | null) | Teacher;
   isElective?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "timetable".
+ */
+export interface Timetable {
+  id: string;
+  applicationDate: string;
+  monday?: {
+    morning?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+      period_5?: (string | null) | Subject;
+    };
+    afternoon?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+    };
+  };
+  tuesday?: {
+    morning?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+      period_5?: (string | null) | Subject;
+    };
+    afternoon?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+    };
+  };
+  wednesday?: {
+    morning?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+      period_5?: (string | null) | Subject;
+    };
+  };
+  thursday?: {
+    morning?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+      period_5?: (string | null) | Subject;
+    };
+    afternoon?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+    };
+  };
+  friday?: {
+    morning?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+      period_5?: (string | null) | Subject;
+    };
+    afternoon?: {
+      period_1?: (string | null) | Subject;
+      period_2?: (string | null) | Subject;
+      period_3?: (string | null) | Subject;
+      period_4?: (string | null) | Subject;
+    };
+  };
   updatedAt: string;
   createdAt: string;
 }

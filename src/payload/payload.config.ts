@@ -12,13 +12,14 @@ import { Media } from "./collections/Media"
 import { Subjects } from "./collections/Subjects"
 import { Tags } from "./collections/Tags"
 import { Teachers } from "./collections/Teachers"
+import { Timetable } from "./collections/Timetable"
 import { Users } from "./collections/Users"
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
 
 export default buildConfig({
-	collections: [Users, Teachers, Subjects, Assignments, Exams, Tags, Media],
+	collections: [Users, Teachers, Subjects, Timetable, Assignments, Exams, Tags, Media],
 	editor: lexicalEditor({ features: ({ defaultFeatures }) => [...defaultFeatures, HTMLConverterFeature({})] }),
 	secret: process.env.PAYLOAD_SECRET || "",
 	sharp,
